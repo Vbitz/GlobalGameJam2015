@@ -21,7 +21,7 @@
 					<h2>Current Events</h2>
 					<div id="currentEvents">
 						<div id="battle">
-							<h3>Battle with: <span id="battle_monstorName"></span></h3>
+							<h3>Battle with: <span id="battle_monsterName"></span></h3>
 							<div class="progress">
 								<div class="progress-bar" role="progressbar" id="battle_myHealth" style="width: 60%;">
 									<strong>My Health: </strong><span id="battle_myHealthText">60%</span>
@@ -119,6 +119,10 @@
 
 		<script type="text/javascript">
 		$(document).ready(function () {
+			function rand(min, max) {
+				return Math.floor(Math.random() * (max - min)) + min;
+			} 
+
 			function appendElements(ele, child) {
 				if (typeof child == "string") {
 					ele.textContent = child;
@@ -186,10 +190,10 @@
 			item_register("area1_bow", "Last Good Bow", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
 			item_register("area1_dagger", "Shard of Broken Time", weapon_makeStats(100, 500, "smallMelee"), area1_getItemEvents());
 
-			var worldMonstors = {};
+			var worldmonsters = {};
 
-			function monstor_regster(id, displayElement, stats, events) {
-				worldMonstors[id] = {
+			function monster_regster(id, displayElement, stats, events) {
+				worldmonsters[id] = {
 					id: id,
 					displayElement: displayElement,
 					stats: stats,
@@ -197,15 +201,21 @@
 				}
 			}
 
-			function monstor_get(monstorName) {
-				if (worldMonstors[monstorName] === undefined) {
-					throw new Error("Monstor does not exist: " + str);
+			function monster_get(monsterName) {
+				if (worldmonsters[monsterName] === undefined) {
+					throw new Error("monster does not exist: " + str);
 				} else {
-					return worldMonstors[monstorName];
+					return worldmonsters[monsterName];
 				}
 			}
 
-			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
+			function monster_getWeaponDamage(monsterName) {
+				var monster;
+				var dmg = rand(currentWeapon.stats.minAttack, currentWeapon.stats.maxAttack);
+				return dmg;
+			}
+
+			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
 				maxAttack: 100,
 				health: 1000,
@@ -297,14 +307,14 @@
 				callback: null
 			};
 
-			function battle_begin(monstorName, cb) {
-				currentBattle.foe = monstorName;
+			function battle_begin(monsterName, cb) {
+				currentBattle.foe = monsterName;
 				currentBattle.ownHealth = currentBattle.ownMaxHealth = charactor.stats.health;
-				currentBattle.foeHealth = currentBattle.foeMaxHealth =  monstor_get(monstorName).stats.health;
+				currentBattle.foeHealth = currentBattle.foeMaxHealth =  monster_get(monsterName).stats.health;
 				currentBattle.callback = cb;
 
 				$("#battle").show();
-				$("#battle_monstorName").empty().append(monstor_get(monstorName).displayElement.cloneNode(true));
+				$("#battle_monsterName").empty().append(monster_get(monsterName).displayElement.cloneNode(true));
 
 				// Build spell list
 				charactor.spells.forEach(function (spellName) {
@@ -312,6 +322,10 @@
 				});
 
 				battle_renderHealth();
+			}
+
+			function battle_log(who, logText) {
+				$("#battle_combatLog")
 			}
 
 			function battle_attack() {
@@ -326,6 +340,8 @@
 				}
 
 				currentBattle.foeHealth -= ownDmg;
+
+				battle_renderHealth();
 
 				if (currentBattle.foeHealth < 0) {
 					battle_end();
@@ -346,12 +362,18 @@
 			function battle_processTurn() {
 				// monster attack
 				
-				var foeDmg = monstor_getWeaponDamage();
+				var foeDmg = monster_getWeaponDamage(currentBattle.foe);
 
 				if (foeDmg > 0) {
 					battle_log(false, "Hit for " + foeDmg + " damage");
 				} else {
 					battle_log(false, "Missed")
+				}
+
+				battle_renderHealth();
+
+				if (currentBattle.ownHealth < 0) {
+					battle_end();
 				}
 			}
 
