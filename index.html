@@ -145,6 +145,7 @@
 					</table>
 				</div>
 				<div class="col-md-6" id="area2_chat" style="display: none;">
+					<h2>Live Chat</h2>
 					<table class="table table-striped">
 						<tbody id="area2_chat_messages">
 							
@@ -676,6 +677,9 @@
 
 			function area2_start() {
 				// Build credits
+				
+				console.log("area2_start");
+
 				$("#gameContainer").hide();
 
 				area2_names = shuffle(area2_names);
@@ -691,7 +695,7 @@
 				setTimeout(function () {
 					// active web streaming chat simulator
 					area2_chat_begin();
-				}, (area2_roles.length / 2) * 1000);
+				}, (area2_roles.length / 4) * 1000);
 			}
 
 			function area2_generateCommentNickname() {
@@ -724,19 +728,21 @@
 			}
 
 			function area2_generateCommentMessage() {
-				return area2_chat_messages[rand(0, area2_chat_messages.length)];
+				return area2_comments[rand(0, area2_comments.length)];
 			}
 
 			function area2_chat_begin() {
+				console.log("area2_chat_begin");
 				$("#area2_chat").show();
 				$("#area2_credits_area").attr("class", "col-md-6"); // shrink the credits
 				var messageCount = 0,
 					currentMessageCount = 0;
 				function addNewMessage() {
+					console.log("area2_addNewMessage");
 					if (messageCount > 1000) {
 
 					} else {
-						if (currentMessageCount > 60) {
+						if (currentMessageCount > 20) {
 							$("#area2_chat_messages").find("tr:first").remove();
 						}
 						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
@@ -751,6 +757,8 @@
 			}
 
 			window.area2_start = area2_start;
+
+			console.log(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
 
 			area1_start();
 		});
