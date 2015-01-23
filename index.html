@@ -55,11 +55,18 @@
 								</div>
 							</div>
 							<h4>Combat Log</h3>
-							<div id="battle_combatLog">
-
+							<table>
+								<thead>
+									<tr>
+										<th>Who</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody id="battle_combatLog">
+								</tbody>
 							</div>
 							<div id="battle_finish">
-								<button id="battle_finish_btn"></button>
+								<button type="button" class="btn btn-primary" id="battle_finish_btn">Close Battle</button>
 							</div>
 						</div>
 					</div>
@@ -188,10 +195,10 @@
 				};
 			}
 
-			item_register("area1_sword", "Dave's Greatsword", weapon_makeStats(100, 500, "largeMelee"), area1_getItemEvents());
+			item_register("area1_sword", "Dave's Greatsword", weapon_makeStats(50, 400, "largeMelee"), area1_getItemEvents());
 			item_register("area1_staff", "Flaming Hairy Staff", weapon_makeStats(50, 100, "magicRanged"), area1_getItemEvents());
 			item_register("area1_bow", "Last Good Bow", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
-			item_register("area1_dagger", "Shard of Broken Time", weapon_makeStats(100, 500, "smallMelee"), area1_getItemEvents());
+			item_register("area1_dagger", "Shard of Broken Time", weapon_makeStats(150, 300, "smallMelee"), area1_getItemEvents());
 
 			var worldmonsters = {};
 
@@ -221,7 +228,7 @@
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
 				maxAttack: 100,
-				health: 1000,
+				health: 4000,
 				armor: 0.7,
 				level: 1
 			}, {
@@ -307,7 +314,8 @@
 				ownHealth: null,
 				foeMaxHealth: null,
 				foeHealth: null,
-				callback: null
+				callback: null,
+				victroy: null
 			};
 
 			function battle_begin(monsterName, cb) {
@@ -329,7 +337,7 @@
 			}
 
 			function battle_log(who, logText) {
-				$("#battle_combatLog").append(e("div", {}, [
+				$("#battle_combatLog").append(e("tr", {}, [
 					who ? e("strong", {}, "You") : monster_get(currentBattle.foe).displayElement.cloneNode(true),
 					e("span", {}, logText)]));
 			}
@@ -386,16 +394,19 @@
 			}
 
 			function battle_end() {
-				var victroy = false;
+				currentBattle.victroy = false;
 
 				if (currentBattle.foeHealth < 0 && currentBattle.ownHealth > 0) {
-					victroy = true;
+					currentBattle.victroy = true;
 				}
 
 				$("#battle_actions").hide();
 				$("#battle_finish").show();
+			}
 
-				currentBattle.callback(victroy);
+			function battle_finish() {
+				$("#battle").hide();
+				currentBattle.callback(currentBattle.victroy);
 			}
 
 			// Hide inital items
@@ -414,6 +425,10 @@
 			$("#battle_attackButton").click(function (e) {
 				e.preventDefault();
 				battle_attack();
+			});
+			$("#battle_finish_btn").click(function (e) {
+				e.preventDefault();
+				battle_finish();
 			});
 
 			// area1: Prologue + credits
