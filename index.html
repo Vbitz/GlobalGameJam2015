@@ -623,7 +623,24 @@
 			];
 
 			var area2_nicknames = [
-				"Sniper"
+				"Sniper",
+				"King",
+				"LOL",
+				"ROFL",
+				"Warrior",
+				"John",
+				"Mark",
+				"Simon",
+				"Bull",
+				"Queen",
+				"Mitch",
+				"Pig",
+				"Lurker",
+				"CompSci",
+				"Rich",
+				"Fang",
+				"Bat",
+				"Naughty"
 			];
 
 			if (area2_names.length != area2_roles.length) {
@@ -646,7 +663,26 @@
 			}
 
 			function area2_generateComment() {
+				var name = "";
+				if (Math.random() > 0.5) {
+					name += area2_nicknames[rand(0, area2_nicknames.length)];
+				} else if (Math.random() > 0.5) {
+					name += area2_nicknames[rand(0, area2_nicknames.length)] + area2_nicknames[rand(0, area2_nicknames.length)];
+				} else {
+					name += area2_nicknames[rand(0, area2_nicknames.length)] + "_" + area2_nicknames[rand(0, area2_nicknames.length)];
+				}
 
+				if (Math.random() > 0.25) {
+					name += rand(0, 10000).toString();
+				}
+
+				if (Math.random() > 0.75) {
+					name = name.toLowerCase();
+				} else if (Math.random() > 0.75) {
+					name = name.toUpperCase();
+				}
+
+				return name;
 			}
 
 			for (var i = 0; i < 100; i++) {
