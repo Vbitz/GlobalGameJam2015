@@ -28,7 +28,7 @@
 								</div>
 							</div>
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" id="battle_myHealth" style="width: 60%;">
+								<div class="progress-bar" role="progressbar" id="battle_foeHealth" style="width: 60%;">
 									<strong>Enemy Health: </strong><span id="battle_foeHealthText">60%</span>
 								</div>
 							</div>
@@ -109,10 +109,6 @@
 
 		<script type="text/javascript">
 		$(document).ready(function () {
-			function log(s) {
-				console.log(Array.prototype.join.call(arguments, ", "));
-			}
-
 			function appendElements(ele, child) {
 				if (typeof child == "string") {
 					ele.textContent = child;
@@ -202,7 +198,9 @@
 			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
 				maxAttack: 100,
-				health: 100
+				health: 100,
+				armor: 7,
+				level: 1
 			}, {
 			});
 
@@ -222,7 +220,7 @@
 			}
 
 			function char_renderInventroy() {
-				log("Rendering Inventory");
+				console.log("char_renderInventroy");
 				$("#inventory_primary_weapon>ul").empty();
 				$("#inventory_head>ul").empty();
 				$("#inventory_chestplate>ul").empty();
@@ -299,13 +297,16 @@
 			}
 
 			function battle_attack() {
-
+				console.log("battle_attack");
 			}
 
 			function battle_renderHealth() {
 				var myHealthValue = (currentBattle.ownHealth / currentBattle.ownMaxHealth * 100).toFixed(2) + "%",
-					foeHealthValue = () + "%";
-				$("#battle_myHealth")
+					foeHealthValue = (currentBattle.foeHealth / currentBattle.foeMaxHealth * 100).toFixed(2) + "%";
+				$("#battle_myHealth")[0].style.width = myHealthValue;
+				$("#battle_myHealthText").text(myHealthValue);
+				$("#battle_foeHealth")[0].style.width = foeHealthValue;
+				$("#battle_foeHealthText").text(foeHealthValue);
 			}
 
 			function battle_processTurn() {
