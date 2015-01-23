@@ -59,6 +59,9 @@
 									</ul>
 								</div>
 							</div>
+							<div id="battle_finish">
+								<button type="button" class="btn btn-primary" id="battle_finish_btn">Close Battle</button>
+							</div>
 							<h4>Combat Log</h3>
 							<table class="table">
 								<thead>
@@ -70,9 +73,6 @@
 								<tbody id="battle_combatLog">
 								</tbody>
 							</table>
-							<div id="battle_finish">
-								<button type="button" class="btn btn-primary" id="battle_finish_btn">Close Battle</button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -340,10 +340,16 @@
 
 				$("#battle").show();
 				$("#battle_actions").show();
+				$("#battle_finish").hide();
 				$("#battle_monsterName").empty().append(monster_get(monsterName).displayElement.cloneNode(true));
 
 				// Build spell list
 				charactor.spells.forEach(function (spellName) {
+
+				});
+
+				// Build item list
+				Object.keys(charactor.inventory).forEach(function (itemName) {
 
 				});
 
@@ -358,6 +364,8 @@
 
 			function battle_attack() {
 				console.log("battle_attack");
+
+				$("#battle_attack").hide();
 
 				var ownDmg = char_getWeaponDamage(monster_get(currentBattle.foe).stats.armor);
 
@@ -438,7 +446,13 @@
 			$("#battle").hide();
 			$("#battle_attackButton").click(function (e) {
 				e.preventDefault();
+				$(this).hide();
 				battle_attack();
+
+				var self = this; // Stop the Cheese
+				setTimeout(function () {
+					$(self).show();
+				}, 500);
 			});
 			$("#battle_finish_btn").click(function (e) {
 				e.preventDefault();
@@ -488,7 +502,7 @@
 						$("#area1_battleWin").show();
 						$("#area1_win").show();
 					} else {
-
+						// What am I going to do about losses, easier difficulty
 					}
 				});
 			}
