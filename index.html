@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<div class="container">
+		<div class="container-fluid">
 			<h1>GGJGame 2015</h1>
 
 			<div class="jumbotron" id="area1_win" style="display: none;">
@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-4">
 					<h2>Current Events</h2>
 					<div id="currentEvents">
 						<div id="battle">
@@ -96,7 +96,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div id="inventory">
 						<h2>Inventory</h2>
 						<div id="inventory_primary_weapon">
@@ -205,8 +205,8 @@
 			}
 
 			item_register("area1_sword", "Dave's Greatsword", weapon_makeStats(50, 400, "largeMelee"), area1_getItemEvents());
-			item_register("area1_staff", "Flaming Hairy Staff", weapon_makeStats(50, 100, "magicRanged"), area1_getItemEvents());
-			item_register("area1_bow", "Last Good Bow", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
+			item_register("area1_staff", "Flaming Hairy Staff", weapon_makeStats(50, 200, "magicRanged"), area1_getItemEvents());
+			item_register("area1_bow", "Last Good Bow", weapon_makeStats(10, 300, "archerRanged"), area1_getItemEvents());
 			item_register("area1_dagger", "Shard of Broken Time", weapon_makeStats(150, 300, "smallMelee"), area1_getItemEvents());
 
 			var worldmonsters = {};
@@ -274,7 +274,7 @@
 					var itemData = item_get(item);
 					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
 						var ele = null;
-						var display = itemData.displayName;
+						var display = e("span", {}, [e("span", {}, itemData.displayName + " "), e("strong", {}, itemData.stats.minAttack + "-" + itemData.stats.maxAttack + " Damage")]);
 						if (char_itemEquiped(item)) {
 							ele = e("li", {"class": "active"}, e("a", {"data-name": itemData.name}, display));
 						} else {
