@@ -651,6 +651,25 @@
 				"Naughty"
 			];
 
+			var area2_comments = [
+				"This sucks!!!",
+				":BibleThump:",
+				"What is this?",
+				"Do you call this a game?",
+				"lol",
+				"ROFL",
+				"<message deleted>",
+				":)",
+				"GG or RIOT!!",
+				"<< Free stuff here http://example.com/ >>",
+				"That's It?",
+				"Cam or rage",
+				"You should have used Shard of Broken Time, maybe that would have fixed it",
+				"How can you even think that's a good length?",
+				"#ShortGames",
+				"#ggj2015"
+			];
+
 			if (area2_names.length != area2_roles.length) {
 				throw new Error("Bad area2_names/area2_roles length, make sure they're the same");
 			}
@@ -712,7 +731,7 @@
 					if (messageCount > 1000) {
 
 					} else {
-
+						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
 					}
 				}
 			}
