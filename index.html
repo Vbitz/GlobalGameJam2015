@@ -73,7 +73,7 @@
 
 			var inventoryItems = {};
 
-			function registerItem(itemName, stats, events) {
+			function item_register(itemName, stats, events) {
 				inventoryItems[itemName] = {
 					name: itemName,
 					stats: stats,
@@ -81,18 +81,31 @@
 				}
 			}
 
-			function callItemEvent(itemName, eventName, args) {
+			function item_emit(itemName, eventName, args) {
 				if (inventoryItems[itemName] === undefined) {
 					throw new Error("Item does not exist: " + str);
 				}
 				if (inventoryItems[itemName].events[eventName] !== undefined) {
-					inventoryItems[itemName].events[eventName].apply(inventoryItems[itemName], args);
+					return inventoryItems[itemName].events[eventName].apply(inventoryItems[itemName], args);
+				} else {
+					return null;
 				}
 			}
 
+			function weapon_makeStats(minAttack, maxAttack, type) {
+				return {
+					minAttack: minAttack,
+					maxAttack: maxAttack,
+					type: type
+				};
+			}
+
+			item_register("area1_sword", weapon_makeStats(100, 500, "ranged"), area1_getItemEvents());
+
 			var charactor = {
 				equipped: {},
-				inventory: []
+				inventory: [],
+				spells: []
 			};
 
 			function char_renderInventroy() {
@@ -131,14 +144,25 @@
 					$("#inventory").show();
 					$("#inventory_primary_weapon").show();
 					setTimeout(function () {
-						addToInventory("area1_sword");
-						addToInventory("area1_staff");
-						addToInventory("area1_bow");
-						addToInventory("area1_dagger");
-						renderInventroy();
+						char_addToInventory("area1_sword");
+						char_addToInventory("area1_staff");
+						char_addToInventory("area1_bow");
+						char_addToInventory("area1_dagger");
+						char_renderInventroy();
 					}, 1000);
 				}, 1500);
 			}, 500);
+
+			function area1_getItemEvents() {
+				return {
+					"equip": function () {
+						area1_equipedItem();
+					},
+					"swing": function () {
+						area1_swingItem(this.name);
+					}
+				};
+			}
 		});
 		</script>
 	</body>
