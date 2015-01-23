@@ -198,8 +198,8 @@
 			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
 				maxAttack: 100,
-				health: 100,
-				armor: 7,
+				health: 1000,
+				armor: 0.7,
 				level: 1
 			}, {
 			});
@@ -207,8 +207,8 @@
 			var charactor = {
 				stats: {
 					level: 1,
-					armor: 10,
-					health: 100
+					armor: 0.5,
+					health: 1000
 				},
 				equipped: {},
 				inventory: {},
@@ -271,7 +271,11 @@
 			}
 
 			function char_getWeaponDamage() {
+				var currentWeapon = item_get(charactor.equipped["primary_weapon"]);
+				var dmg = rand(currentWeapon.stats.minAttack, currentWeapon.stats.maxAttack);
 
+				item_emit(charactor.equipped["primary_weapon"], "swing", [dmg]);
+				return dmg;
 			}
 
 			var currentBattle = {
@@ -367,7 +371,7 @@
 				battle_attack();
 			});
 
-			// area1_bossBattle part1 pre-battle
+			// area1: Prologe + credits
 			function area1_start() {
 				$("#area1_bossBattle").show();
 
