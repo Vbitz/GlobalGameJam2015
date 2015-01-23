@@ -60,11 +60,12 @@
 									</ul>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary" id="battle_finish">Close Battle</button>
+							<button type="button" class="btn btn-success" id="battle_finish">Close Battle</button>
 							<h4>Combat Log</h3>
 							<table class="table">
 								<thead>
 									<tr>
+										<th>Turn #</th>
 										<th>Who</th>
 										<th>Action</th>
 									</tr>
@@ -239,7 +240,7 @@
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
 				maxAttack: 100,
-				health: 4000,
+				health: 5672,
 				armor: 0.7,
 				level: 1
 			}, {
@@ -248,8 +249,8 @@
 			var charactor = {
 				stats: {
 					level: 1,
-					armor: 0.5,
-					health: 1000
+					armor: 0.25,
+					health: 873
 				},
 				equipped: {},
 				inventory: {},
@@ -328,13 +329,15 @@
 				foeMaxHealth: null,
 				foeHealth: null,
 				callback: null,
-				victroy: null
+				victroy: null,
+				turnNumber: 0
 			};
 
 			function battle_begin(monsterName, cb) {
 				currentBattle.foe = monsterName;
 				currentBattle.ownHealth = currentBattle.ownMaxHealth = charactor.stats.health;
 				currentBattle.foeHealth = currentBattle.foeMaxHealth =  monster_get(monsterName).stats.health;
+				currentBattle.turnNumber = 0;
 				currentBattle.callback = cb;
 
 				$("#battle").show();
@@ -387,9 +390,11 @@
 				var myHealthValue = (currentBattle.ownHealth / currentBattle.ownMaxHealth * 100).toFixed(2) + "%",
 					foeHealthValue = (currentBattle.foeHealth / currentBattle.foeMaxHealth * 100).toFixed(2) + "%";
 				$("#battle_myHealth")[0].style.width = myHealthValue;
-				$("#battle_myHealthText").text(myHealthValue);
+				$("#battle_myHealthText").text("(" + currentBattle.ownHealth.toFixed(2) +
+					" / " + currentBattle.ownMaxHealth.toFixed(2) + ") " + myHealthValue);
 				$("#battle_foeHealth")[0].style.width = foeHealthValue;
-				$("#battle_foeHealthText").text(foeHealthValue);
+				$("#battle_foeHealthText").text("(" + currentBattle.foeHealth.toFixed(2) +
+					" / " + currentBattle.foeMaxHealth.toFixed(2) + ") " + foeHealthValue);
 			}
 
 			function battle_processTurn() {
