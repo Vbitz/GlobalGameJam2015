@@ -100,7 +100,10 @@
 				};
 			}
 
-			item_register("area1_sword", weapon_makeStats(100, 500, "ranged"), area1_getItemEvents());
+			item_register("area1_sword", weapon_makeStats(100, 500, "largeMelee"), area1_getItemEvents());
+			item_register("area1_staff", weapon_makeStats(50, 100, "magicRanged"), area1_getItemEvents());
+			item_register("area1_bow", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
+			item_register("area1_dagger", weapon_makeStats(100, 500, "smallMelee"), area1_getItemEvents());
 
 			var charactor = {
 				equipped: {},
