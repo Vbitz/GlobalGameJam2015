@@ -33,7 +33,7 @@
 								</div>
 							</div>
 							<h4>Current Turn</h4>
-							<div class="btn-group" role="group" aria-label="battle_actions">
+							<div class="btn-group" role="group" aria-label="battle_actions" id="battle_actions">
 								<button type="button" class="btn btn-primary" id="battle_attackButton">Attack</button>
 								
 								<div class="btn-group" id="battle_castSpell" style="display: none;">
@@ -57,6 +57,9 @@
 							<h4>Combat Log</h3>
 							<div id="battle_combatLog">
 
+							</div>
+							<div id="battle_finish">
+								<button id="battle_finish_btn"></button>
 							</div>
 						</div>
 					</div>
@@ -210,8 +213,8 @@
 			}
 
 			function monster_getWeaponDamage(monsterName) {
-				var monster;
-				var dmg = rand(currentWeapon.stats.minAttack, currentWeapon.stats.maxAttack);
+				var monster = monster_get(monsterName);
+				var dmg = rand(monster.stats.minAttack, monster.stats.maxAttack);
 				return dmg;
 			}
 
@@ -314,6 +317,7 @@
 				currentBattle.callback = cb;
 
 				$("#battle").show();
+				$("#battle_actions").show();
 				$("#battle_monsterName").empty().append(monster_get(monsterName).displayElement.cloneNode(true));
 
 				// Build spell list
@@ -325,7 +329,9 @@
 			}
 
 			function battle_log(who, logText) {
-				$("#battle_combatLog")
+				$("#battle_combatLog").append(e("div", {}, [
+					who ? e("strong", {}, "You") : monster_get(currentBattle.foe).displayElement.cloneNode(true),
+					e("span", {}, logText)]));
 			}
 
 			function battle_attack() {
@@ -370,6 +376,8 @@
 					battle_log(false, "Missed")
 				}
 
+				currentBattle.ownHealth -= foeDmg;
+
 				battle_renderHealth();
 
 				if (currentBattle.ownHealth < 0) {
@@ -384,7 +392,8 @@
 					victroy = true;
 				}
 
-				$("#battle").hide();
+				$("#battle_actions").hide();
+				$("#battle_finish").show();
 
 				currentBattle.callback(victroy);
 			}
@@ -444,7 +453,9 @@
 
 			function area1_beginBossBattle() {
 				console.log("area1_beginBossBattle");
-				battle_begin("area1_boss");
+				battle_begin("area1_boss", function () {
+
+				});
 			}
 
 			function area1_swingItem(itemName) {
