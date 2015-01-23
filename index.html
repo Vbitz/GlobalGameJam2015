@@ -476,6 +476,7 @@
 				$("#area1_postEquip_itemName").text(item_get(itemName).displayName);
 				$("#area1_startBattle").click(function (e) {
 					e.preventDefault();
+					$(this).hide();
 					area1_beginBossBattle();
 				});
 			}
