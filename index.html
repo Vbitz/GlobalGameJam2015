@@ -554,9 +554,9 @@
 				"Lead Gameplay Programmer",
 				"Lead Engine Programmer",
 				"Senior Gameplay Programmer", "", "", "",
-				"Gameplay Programmer", "", "", "", "", "",
-				"Senior Engine Programmer", "", "", "",
-				"Engine Programmer", "", "", "", "", "",
+				"Gameplay Programmer", "", "", "", "", "", "",
+				"Senior Engine Programmer", "", "", "", "",
+				"Engine Programmer", "", "", "", "", "", "",
 				"Tools Programmer", "",
 				"Lead Artist",
 				"Senior Artist", "", "", "", "",
@@ -564,8 +564,7 @@
 				"Head of IT Support",
 				"IT Support", "",
 				"Building Manager",
-				"Janitor", "",
-				"Special Thanks", "", "", ""
+				"Janitor", ""
 			];
 
 			// UOW Computer Science Staff
@@ -601,7 +600,7 @@
 				"Nicholas (Nic) Vanderschantz", 
 				"Ian Witten", 
 				"Shaoqun Wu", 
-				"Stefan Rüger", 
+				"Stefan Ruger", 
 				"Robert Spence", 
 				"Tim Elphick", 
 				"Nilesh Kanji", 
@@ -632,14 +631,13 @@
 				$("#gameContainer").hide();
 
 				area2_names = shuffle(area2_names);
-				area2_roles.reverse();
 
 				$("#area2_credits").show();
 
 				area2_roles.forEach(function (role, index) {
 					setTimeout(function () {
 						$("#area2_credits_table").append(e("tr", {}, [e("td", {"style": "text-align: right; font-weight: bold;"}, role), e("td", {}, area2_names[index])]));
-					}, 100);
+					}, (index) * 1000);
 				});
 			}
 
