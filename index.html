@@ -22,6 +22,8 @@
 			</div>
 
 			<div class="row" id="gameContainer">
+				<button type="button" class="btn btn-default" onclick="area2_start();">Skip Area 1</button>
+
 				<div class="col-md-4">
 					<h2>Current Events</h2>
 					<div id="currentEvents">
@@ -133,7 +135,7 @@
 				</div>
 			</div>
 
-			<div class="row" id="area2_credits">
+			<div class="row" id="area2_credits" style="display: none;">
 				<div class="col-md-6 col-md-offset-3">
 					<table class="table table-striped">
 						<tbody id="area2_credits_table">
@@ -151,6 +153,13 @@
 			function rand(min, max) {
 				return Math.floor(Math.random() * (max - min)) + min;
 			} 
+
+			//+ Jonas Raoni Soares Silva
+			//@ http://jsfromhell.com/array/shuffle [v1.0]
+			function shuffle(o){ //v1.0
+				for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+				return o;
+			};
 
 			function appendElements(ele, child) {
 				if (typeof child == "string") {
@@ -613,9 +622,23 @@
 				"Lloyd Smith"
 			];
 
+			if (area2_names.length != area2_roles.length) {
+				throw new Error("Bad area2_names/area2_roles length, make sure they're the same");
+			}
+
 			function area2_start() {
 				// Build credits
-				$("gameContainer").hide();
+				$("#gameContainer").hide();
+
+				area2_names = area2_names.shuffle();
+
+				$("#area2_credits").show();
+
+				area2_roles.forEach(function (role, index) {
+					setTimeout(function () {
+						$("#area2_credits_table").prepend(e("tr", {}, [e("td", {}, role), e("td", {}, area2_names[index])]));
+					}, 100);
+				});
 			}
 
 			area1_start();
