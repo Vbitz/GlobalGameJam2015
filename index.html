@@ -144,6 +144,9 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="col-md-6" id="area2_chat" style="display: none;">
+					<ul id="area2_chat_messages">
+				</div>
 			</div>
 		</div>
 
@@ -660,6 +663,11 @@
 						$("#area2_credits_table").append(e("tr", {}, [e("td", {"style": "text-align: right; font-weight: bold;"}, role), e("td", {}, area2_names[index])]));
 					}, (index) * 1000);
 				});
+
+				setTimeout(function () {
+					// active web streaming chat simulator
+					area2_chat_begin();
+				}, (area2_roles.length / 2) * 1000);
 			}
 
 			function area2_generateComment() {
@@ -691,8 +699,8 @@
 				return name;
 			}
 
-			for (var i = 0; i < 100; i++) {
-				console.log(area2_generateComment());
+			function area2_chat_begin() {
+
 			}
 
 			window.area2_start = area2_start;
