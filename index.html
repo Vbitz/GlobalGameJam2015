@@ -70,18 +70,45 @@
 			function log(s) {
 				console.log(Array.prototype.join.call(arguments, ", "));
 			}
+
+			var inventoryItems = {};
+
+			function registerItem(itemName, stats, events) {
+				inventoryItems[itemName] = {
+					name: itemName,
+					stats: stats,
+					events: events
+				}
+			}
+
+			function callItemEvent(itemName, eventName, args) {
+				if (inventoryItems[itemName] === undefined) {
+					throw new Error("Item does not exist: " + str);
+				}
+				if (inventoryItems[itemName].events[eventName] !== undefined) {
+					inventoryItems[itemName].events[eventName].apply(inventoryItems[itemName], args);
+				}
+			}
+
 			var charactor = {
 				equipped: {},
 				inventory: []
 			};
 
-			function renderInventroy() {
+			function char_renderInventroy() {
 				log("Rendering Inventory");
 				$("#inventory_primary_weapon>ul").empty();
 				$("#inventory_head>ul").empty();
 				$("#inventory_chestplate>ul").empty();
 				$("#inventory_gloves>ul").empty();
 				$("#inventory_boots>ul").empty();
+			}
+
+			function char_addToInventory(str) {
+				if (inventoryItems[str] === undefined) {
+					throw new Error("Item does not exist: " + str);
+				}
+				player.inventory.push(inventoryItems[str]);
 			}
 
 			// Hide inital items
