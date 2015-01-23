@@ -136,7 +136,7 @@
 			</div>
 
 			<div class="row" id="area2_credits" style="display: none;">
-				<div class="col-md-6 col-md-offset-3">
+				<div class="col-md-6 col-md-offset-3" id="area2_credits_area">
 					<h2>Credits</h2>
 					<table class="table table-striped">
 						<tbody id="area2_credits_table">
@@ -723,17 +723,31 @@
 				return name;
 			}
 
+			function area2_generateCommentMessage() {
+				return area2_chat_messages[rand(0, area2_chat_messages.length)];
+			}
+
 			function area2_chat_begin() {
 				$("#area2_chat").show();
+				$("#area2_credits_area").attr("class", "col-md-6"); // shrink the credits
 				var messageCount = 0,
 					currentMessageCount = 0;
 				function addNewMessage() {
 					if (messageCount > 1000) {
 
 					} else {
+						if (currentMessageCount > 60) {
+							$("#area2_chat_messages").find("tr:first").remove();
+						}
 						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
+
+						messageCount++;
+						currentMessageCount++;
+
+						setTimeout(addNewMessage, rand(50, 200));
 					}
 				}
+				addNewMessage();
 			}
 
 			window.area2_start = area2_start;
