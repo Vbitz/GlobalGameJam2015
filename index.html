@@ -71,6 +71,19 @@
 				console.log(Array.prototype.join.call(arguments, ", "));
 			}
 
+			function appendElements(ele, child) {
+
+			}
+
+			function e(type, attrs, body) {
+				var ele = document.createElement(type);
+				for (var key in attrs) {
+					ele.setAttribute(key, attrs[key]);
+				}
+				appendElements(ele, body);
+				return ele;
+			}
+
 			var inventoryItems = {};
 
 			function item_register(itemName, displayName stats, events) {
@@ -103,8 +116,8 @@
 
 			item_register("area1_sword", "Dave's Greatsword", weapon_makeStats(100, 500, "largeMelee"), area1_getItemEvents());
 			item_register("area1_staff", "Flaming Hairy Staff", weapon_makeStats(50, 100, "magicRanged"), area1_getItemEvents());
-			item_register("area1_bow", "", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
-			item_register("area1_dagger", weapon_makeStats(100, 500, "smallMelee"), area1_getItemEvents());
+			item_register("area1_bow", "Last Good Bow", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
+			item_register("area1_dagger", "Shard of Broken Time", weapon_makeStats(100, 500, "smallMelee"), area1_getItemEvents());
 
 			var charactor = {
 				equipped: {},
