@@ -17,7 +17,8 @@
 			<h1>GGJGame 2015</h1>
 
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-4">
+					<h2>Quest Log</h2>
 					<div id="partList">
 						<div id="area1_bossBattle">
 							<div id="area1_prologe">
@@ -25,6 +26,11 @@
 								After the end of your long quest you reach your final goal. <em class="boss-ada-ra">Ada-Ra, King of Elements</em> reaches out to touch your sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<h2>Current Events</h2>
+					<div id="currentEvents">
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -96,7 +102,7 @@
 
 			var inventoryItems = {};
 
-			function item_register(itemName, displayName stats, events) {
+			function item_register(itemName, displayName, stats, events) {
 				inventoryItems[itemName] = {
 					name: itemName,
 					displayName: displayName,
@@ -152,7 +158,8 @@
 				$("#inventory_gloves>ul").empty();
 				$("#inventory_boots>ul").empty();
 
-				for (var item in player.inventory) {
+				for (var item in charactor.inventory) {
+					var entryData = charactor.inventory[item];
 					
 				}
 			}
@@ -162,7 +169,13 @@
 					throw new Error("Item does not exist: " + str);
 				}
 
-				player.inventory.push({name: str, count: 1});
+				if (charactor.inventory[str] === undefined) {
+					charactor.inventory[str] = {
+						count: 0
+					};
+				}
+
+				charactor.inventory[str].count++;
 			}
 
 			// Hide inital items
