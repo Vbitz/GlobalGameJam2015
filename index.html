@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<h2>Current Events</h2>
 					<div id="currentEvents">
 						<div id="battle">
@@ -37,8 +37,9 @@
 									<strong>Enemy Health: </strong><span id="battle_foeHealthText">60%</span>
 								</div>
 							</div>
-							<h4>Current Turn</h4>
 							<div class="btn-group" role="group" aria-label="battle_actions" id="battle_actions">
+								<button type="button" class="btn btn-default"><strong>Battle Actions: </button>
+
 								<button type="button" class="btn btn-primary" id="battle_attackButton">Attack</button>
 								
 								<div class="btn-group" id="battle_castSpell" style="display: none;">
@@ -59,9 +60,7 @@
 									</ul>
 								</div>
 							</div>
-							<div id="battle_finish">
-								<button type="button" class="btn btn-primary" id="battle_finish_btn">Close Battle</button>
-							</div>
+							<button type="button" class="btn btn-primary" id="battle_finish">Close Battle</button>
 							<h4>Combat Log</h3>
 							<table class="table">
 								<thead>
@@ -96,7 +95,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div id="inventory">
 						<h2>Inventory</h2>
 						<div id="inventory_primary_weapon">
@@ -365,12 +364,10 @@
 			function battle_attack() {
 				console.log("battle_attack");
 
-				$("#battle_attack").hide();
-
 				var ownDmg = char_getWeaponDamage(monster_get(currentBattle.foe).stats.armor);
 
 				if (ownDmg > 0) {
-					battle_log(true, "Hit for " + ownDmg + " damage");
+					battle_log(true, "Hit for " + ownDmg.toFixed(2) + " damage");
 				} else {
 					battle_log(true, "Missed");
 				}
@@ -401,7 +398,7 @@
 				var foeDmg = monster_getWeaponDamage(currentBattle.foe, charactor.stats.armor);
 
 				if (foeDmg > 0) {
-					battle_log(false, "Hit for " + foeDmg + " damage");
+					battle_log(false, "Hit for " + foeDmg.toFixed(2) + " damage");
 				} else {
 					battle_log(false, "Missed")
 				}
@@ -454,7 +451,7 @@
 					$(self).show();
 				}, 500);
 			});
-			$("#battle_finish_btn").click(function (e) {
+			$("#battle_finish").click(function (e) {
 				e.preventDefault();
 				battle_finish();
 			});
