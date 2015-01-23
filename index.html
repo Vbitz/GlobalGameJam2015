@@ -168,17 +168,25 @@
 					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
 						var ele = null;
 						if (char_itemEquiped(item)) {
-							ele = e("li", {"class": "active"}, e("a", {"click": function () {
-
-							}}, itemData.displayName);
+							ele = e("li", {"class": "active"}, e("a", {}, itemData.displayName));
 						} else {
-							ele = e("li", {}, itemData.displayName);
+							ele = e("li", {}, e("a", {}, itemData.displayName));
 						}
+						$(ele).children("a").click(function (e) {
+							e.preventDefault();
+							char_equipItem(itemData.name);
+						});
 						$("#inventory_" + itemData.stats.slot + ">ul").append(ele);
 					} else {
 						throw new Error("Bad Slot: " + itemData.stats.slot)
 					}
 				}
+			}
+
+			function char_equipItem(itemName) {
+				charactor[equipped]
+				item_emit(str, "equip", []);
+				char_renderInventroy();
 			}
 
 			function char_addToInventory(str) {
@@ -193,6 +201,8 @@
 				}
 
 				charactor.inventory[str].count++;
+
+				item_emit(str, "add", []);
 			}
 
 			// Hide inital items
