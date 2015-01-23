@@ -21,8 +21,8 @@
 					<h2>Current Events</h2>
 					<div id="currentEvents">
 						<div id="battle">
-							<h2>Battle with: <span id="battle_monstorName"></span></h2>
-							<h3>Combat Log</h3>
+							<h3>Battle with: <span id="battle_monstorName"></span></h3>
+							<h4>Combat Log</h3>
 							<div id="battle_combatLog">
 
 							</div>
@@ -167,6 +167,14 @@
 				}
 			}
 
+			function monstor_get(monstorName) {
+				if (worldMonstors[monstorName] === undefined) {
+					throw new Error("Monstor does not exist: " + str);
+				} else {
+					return worldMonstors[monstorName];
+				}
+			}
+
 			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
 				maxAttack: 100
@@ -244,6 +252,9 @@
 
 			function battle_begin(monstorName, cb) {
 				currentBattle.callback = cb;
+
+				$("#battle").show();
+				$("#battle_monstorName").empty().append(monstor_get(monstorName).displayElement.cloneNode(true));
 			}
 
 			function battle_end() {
@@ -263,6 +274,8 @@
 			$("#inventory_chestplate").hide();
 			$("#inventory_gloves").hide();
 			$("#inventory_boots").hide();
+
+			$("#battle").hide();
 
 			// area1_bossBattle part1 pre-battle
 			function area1_start() {
