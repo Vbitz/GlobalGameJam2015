@@ -23,7 +23,10 @@
 						<div id="area1_bossBattle">
 							<div id="area1_prologe">
 								<h2>Prologue</h2>
-								After the end of your long quest you reach your final goal. <em class="boss-ada-ra">Ada-Ra, King of Elements</em> reaches out to touch your sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
+								After the end of your long quest you reach your final goal. <em class="boss-ada-ra">Ada-Ra, King of Elements</em> reaches out to touch his sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
+							</div>
+							<div id="area1_postEquip">
+								You pull your <span id="area1_postEquip_itemName"></span> and 
 							</div>
 						</div>
 					</div>
@@ -168,13 +171,13 @@
 					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
 						var ele = null;
 						if (char_itemEquiped(item)) {
-							ele = e("li", {"class": "active"}, e("a", {}, itemData.displayName));
+							ele = e("li", {"class": "active"}, e("a", {"data-name": itemData.name}, itemData.displayName));
 						} else {
-							ele = e("li", {}, e("a", {}, itemData.displayName));
+							ele = e("li", {}, e("a", {"data-name": itemData.name}, itemData.displayName));
 						}
 						$(ele).children("a").click(function (e) {
 							e.preventDefault();
-							char_equipItem(itemData.name);
+							char_equipItem($(this).attr("data-name"));
 						});
 						$("#inventory_" + itemData.stats.slot + ">ul").append(ele);
 					} else {
@@ -184,8 +187,8 @@
 			}
 
 			function char_equipItem(itemName) {
-				charactor[equipped]
-				item_emit(str, "equip", []);
+				charactor.equipped[item_get(itemName).stats.slot] = itemName;
+				item_emit(itemName, "equip", []);
 				char_renderInventroy();
 			}
 
@@ -218,21 +221,18 @@
 			$("#inventory_boots").hide();
 
 			// area1_bossBattle part1 pre-battle
-			setTimeout(function () {
+			function area1_start() {
 				$("#area1_bossBattle").show();
 
-				setTimeout(function () {
-					$("#inventory").show();
-					$("#inventory_primary_weapon").show();
-					setTimeout(function () {
-						char_addToInventory("area1_sword");
-						char_addToInventory("area1_staff");
-						char_addToInventory("area1_bow");
-						char_addToInventory("area1_dagger");
-						char_renderInventroy();
-					}, 1000);
-				}, 1500);
-			}, 500);
+				$("#inventory").show();
+				$("#inventory_primary_weapon").show();
+
+				char_addToInventory("area1_sword");
+				char_addToInventory("area1_staff");
+				char_addToInventory("area1_bow");
+				char_addToInventory("area1_dagger");
+				char_renderInventroy();
+			}
 
 			function area1_getItemEvents() {
 				return {
@@ -244,6 +244,16 @@
 					}
 				};
 			}
+
+			function area1_equipedItem() {
+				console.log("area1_equipedItem");
+			}
+
+			function area1_swingItem(itemName) {
+				console.log("area1_swingItem", itemName);
+			}
+
+			area1_start();
 		});
 		</script>
 	</body>
