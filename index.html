@@ -622,6 +622,10 @@
 				"Lloyd Smith"
 			];
 
+			var area2_nicknames = [
+				"Sniper"
+			];
+
 			if (area2_names.length != area2_roles.length) {
 				throw new Error("Bad area2_names/area2_roles length, make sure they're the same");
 			}
@@ -639,6 +643,14 @@
 						$("#area2_credits_table").append(e("tr", {}, [e("td", {"style": "text-align: right; font-weight: bold;"}, role), e("td", {}, area2_names[index])]));
 					}, (index) * 1000);
 				});
+			}
+
+			function area2_generateComment() {
+
+			}
+
+			for (var i = 0; i < 100; i++) {
+				console.log(area2_generateComment());
 			}
 
 			window.area2_start = area2_start;
