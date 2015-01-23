@@ -165,6 +165,16 @@
 				return ele;
 			}
 
+			function getProgressBarColor(value) {
+				if (value < 0.1) {
+					return "progress-bar progress-bar-danger"
+				} else if (value > 0.1 && value < 0.9) {
+					return "progress-bar progress-bar-warning"
+				} else {
+					return "progress-bar progress-bar-success";
+				}
+			}
+
 			var inventoryItems = {};
 
 			function item_register(itemName, displayName, stats, events) {
@@ -274,7 +284,7 @@
 					var itemData = item_get(item);
 					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
 						var ele = null;
-						var display = e("span", {}, [e("span", {}, itemData.displayName + " "), e("strong", {}, itemData.stats.minAttack + "-" + itemData.stats.maxAttack + " Damage")]);
+						var display = e("span", {}, [e("span", {}, itemData.displayName + " "), e("strong", {}, itemData.stats.minAttack + "-" + itemData.stats.maxAttack + " " + itemData.stats.type Damage")]);
 						if (char_itemEquiped(item)) {
 							ele = e("li", {"class": "active"}, e("a", {"data-name": itemData.name}, display));
 						} else {
@@ -391,9 +401,11 @@
 				var myHealthValue = (currentBattle.ownHealth / currentBattle.ownMaxHealth * 100).toFixed(2) + "%",
 					foeHealthValue = (currentBattle.foeHealth / currentBattle.foeMaxHealth * 100).toFixed(2) + "%";
 				$("#battle_myHealth")[0].style.width = myHealthValue;
+				$("#battle_myHealth").attr("class", getProgressBarColor(currentBattle.ownHealth / currentBattle.ownMaxHealth));
 				$("#battle_myHealthText").text("(" + currentBattle.ownHealth.toFixed(2) +
 					" / " + currentBattle.ownMaxHealth.toFixed(2) + ") " + myHealthValue);
 				$("#battle_foeHealth")[0].style.width = foeHealthValue;
+				$("#battle_foeHealth").attr("class", getProgressBarColor(currentBattle.foeHealth / currentBattle.foeMaxHealth));
 				$("#battle_foeHealthText").text("(" + currentBattle.foeHealth.toFixed(2) +
 					" / " + currentBattle.foeMaxHealth.toFixed(2) + ") " + foeHealthValue);
 			}
