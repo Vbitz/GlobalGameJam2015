@@ -135,7 +135,7 @@
 					minAttack: minAttack,
 					maxAttack: maxAttack,
 					type: type,
-					slot: "primaryWeapon"
+					slot: "primary_weapon"
 				};
 			}
 
@@ -150,6 +150,10 @@
 				spells: []
 			};
 
+			function char_itemEquiped(itemName) {
+				return charactor.equipped[item_get(itemName).stats.slot] == itemName;
+			}
+
 			function char_renderInventroy() {
 				log("Rendering Inventory");
 				$("#inventory_primary_weapon>ul").empty();
@@ -160,7 +164,20 @@
 
 				for (var item in charactor.inventory) {
 					var entryData = charactor.inventory[item];
-					
+					var itemData = item_get(item);
+					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
+						var ele = null;
+						if (char_itemEquiped(item)) {
+							ele = e("li", {"class": "active"}, e("a", {"click": function () {
+
+							}}, itemData.displayName);
+						} else {
+							ele = e("li", {}, itemData.displayName);
+						}
+						$("#inventory_" + itemData.stats.slot + ">ul").append(ele);
+					} else {
+						throw new Error("Bad Slot: " + itemData.stats.slot)
+					}
 				}
 			}
 
