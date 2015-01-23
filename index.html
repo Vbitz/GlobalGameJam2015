@@ -73,9 +73,10 @@
 
 			var inventoryItems = {};
 
-			function item_register(itemName, stats, events) {
+			function item_register(itemName, displayName stats, events) {
 				inventoryItems[itemName] = {
 					name: itemName,
+					displayName: displayName,
 					stats: stats,
 					events: events
 				}
@@ -100,9 +101,9 @@
 				};
 			}
 
-			item_register("area1_sword", weapon_makeStats(100, 500, "largeMelee"), area1_getItemEvents());
-			item_register("area1_staff", weapon_makeStats(50, 100, "magicRanged"), area1_getItemEvents());
-			item_register("area1_bow", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
+			item_register("area1_sword", "Dave's Greatsword", weapon_makeStats(100, 500, "largeMelee"), area1_getItemEvents());
+			item_register("area1_staff", "Flaming Hairy Staff", weapon_makeStats(50, 100, "magicRanged"), area1_getItemEvents());
+			item_register("area1_bow", "", weapon_makeStats(10, 200, "archerRanged"), area1_getItemEvents());
 			item_register("area1_dagger", weapon_makeStats(100, 500, "smallMelee"), area1_getItemEvents());
 
 			var charactor = {
