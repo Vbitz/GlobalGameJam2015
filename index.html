@@ -16,6 +16,11 @@
 		<div class="container">
 			<h1>GGJGame 2015</h1>
 
+			<div class="jumbotron" id="area1_win" style="display: none;">
+				<h1>Game, Over! You WIN.</h1>
+				<button type="button" class="btn btn-primary">What do I do now?</button>
+			</div>
+
 			<div class="row">
 				<div class="col-md-4">
 					<h2>Current Events</h2>
@@ -85,11 +90,8 @@
 								<button class="btn btn-primary" id="area1_startBattle">Start Battle</button>
 							</div>
 							<div id="area1_battleWin" style="display: none;">
-								<h2>Part 2</h2>
+								<h2>Part 3</h2>
 								Congratulations you have defeated <em class="area1_boss">Ada-Ra, King of Elements</em>.
-								<div class="jumbotron">
-									<h1>Game, Over! You WIN</h1>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -226,9 +228,12 @@
 				}
 			}
 
-			function monster_getWeaponDamage(monsterName) {
+			function monster_getWeaponDamage(monsterName, foeArmor) {
 				var monster = monster_get(monsterName);
 				var dmg = rand(monster.stats.minAttack, monster.stats.maxAttack);
+
+				dmg *= foeArmor;
+
 				return dmg;
 			}
 
@@ -354,7 +359,7 @@
 			function battle_attack() {
 				console.log("battle_attack");
 
-				var ownDmg = char_getWeaponDamage();
+				var ownDmg = char_getWeaponDamage(monster_get(currentBattle.foe).stats.armor);
 
 				if (ownDmg > 0) {
 					battle_log(true, "Hit for " + ownDmg + " damage");
@@ -385,7 +390,7 @@
 			function battle_processTurn() {
 				// monster attack
 				
-				var foeDmg = monster_getWeaponDamage(currentBattle.foe);
+				var foeDmg = monster_getWeaponDamage(currentBattle.foe, charactor.stats.armor);
 
 				if (foeDmg > 0) {
 					battle_log(false, "Hit for " + foeDmg + " damage");
@@ -480,6 +485,7 @@
 				battle_begin("area1_boss", function (victroy) {
 					if (victroy) {
 						$("#area1_battleWin").show();
+						$("#area1_win").show();
 					} else {
 
 					}
