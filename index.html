@@ -28,19 +28,38 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div id="inventroy">
-						<ul class="nav nav-pills nav-stacked">
+					<div id="inventory">
+						<h2>Inventory</h2>
+						<div id="inventory_primary_weapon">
+							<h3>Primary Weapon</h3>
+							<ul class="nav nav-pills nav-stacked">
 
-						</ul>
-						<ul class="nav nav-pills nav-stacked">
+							</ul>
+						</div>
+						<div id="inventory_head">
+							<h3>Head</h3>
+							<ul class="nav nav-pills nav-stacked">
 
-						</ul>
-						<ul class="nav nav-pills nav-stacked">
+							</ul>
+						</div>
+						<div id="inventory_chestplate">
+							<h3>Chest-plate</h3>
+							<ul class="nav nav-pills nav-stacked">
 
-						</ul>
-						<ul class="nav nav-pills nav-stacked">
+							</ul>
+						</div>
+						<div id="inventory_gloves">
+							<h3>Gloves</h3>
+							<ul class="nav nav-pills nav-stacked">
 
-						</ul>
+							</ul>
+						</div>
+						<div id="inventory_boots">
+							<h3>Boots</h3>
+							<ul class="nav nav-pills nav-stacked">
+
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -48,6 +67,10 @@
 
 		<script type="text/javascript">
 		$(document).ready(function () {
+			function renderInventroy() {
+				
+			}
+
 			$("#partList").children().each(function (i, element) {
 				$(element).hide();
 			});
@@ -56,9 +79,17 @@
 				$("#area1_bossBattle").show();
 
 				setTimeout(function () {
-					$("#inventroy").show();
+					$("#inventory").show();
+					$("#inventory_primary_weapon").show();
 				}, 1500);
 			}, 500);
+
+			$("#inventory").hide();
+			$("#inventory_primary_weapon").hide();
+			$("#inventory_head").hide();
+			$("#inventory_chestplate").hide();
+			$("#inventory_gloves").hide();
+			$("#inventory_boots").hide();
 		});
 		</script>
 	</body>
