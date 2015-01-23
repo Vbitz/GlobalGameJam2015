@@ -270,6 +270,10 @@
 				item_emit(str, "add", []);
 			}
 
+			function char_getWeaponDamage() {
+
+			}
+
 			var currentBattle = {
 				foe: null,
 				ownMaxHealth: null,
@@ -298,6 +302,22 @@
 
 			function battle_attack() {
 				console.log("battle_attack");
+
+				var ownDmg = char_getWeaponDamage();
+
+				if (ownDmg > 0) {
+					battle_log(true, "Hit for " + ownDmg + " damage");
+				} else {
+					battle_log(true, "Missed");
+				}
+
+				currentBattle.foeHealth -= ownDmg;
+
+				if (currentBattle.foeHealth < 0) {
+					battle_end();
+				} else {
+					battle_processTurn();
+				}
 			}
 
 			function battle_renderHealth() {
@@ -310,11 +330,21 @@
 			}
 
 			function battle_processTurn() {
+				// monster attack
+				
+				var foeDmg = monstor_getWeaponDamage();
 
+				if (foeDmg > 0) {
+					battle_log(false, "Hit for " + foeDmg + " damage");
+				} else {
+					battle_log(false, "Missed")
+				}
 			}
 
 			function battle_end() {
 				var victroy = false;
+
+				$("#battle").hide();
 
 				currentBattle.callback(victroy);
 			}
