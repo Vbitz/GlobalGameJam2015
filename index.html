@@ -67,22 +67,27 @@
 
 		<script type="text/javascript">
 		$(document).ready(function () {
+			function log(s) {
+				console.log(Array.prototype.join.call(arguments, ", "));
+			}
+			var charactor = {
+				equipped: {},
+				inventory: []
+			};
+
 			function renderInventroy() {
-				
+				log("Rendering Inventory");
+				$("#inventory_primary_weapon>ul").empty();
+				$("#inventory_head>ul").empty();
+				$("#inventory_chestplate>ul").empty();
+				$("#inventory_gloves>ul").empty();
+				$("#inventory_boots>ul").empty();
 			}
 
+			// Hide inital items
 			$("#partList").children().each(function (i, element) {
 				$(element).hide();
 			});
-
-			setTimeout(function () {
-				$("#area1_bossBattle").show();
-
-				setTimeout(function () {
-					$("#inventory").show();
-					$("#inventory_primary_weapon").show();
-				}, 1500);
-			}, 500);
 
 			$("#inventory").hide();
 			$("#inventory_primary_weapon").hide();
@@ -90,6 +95,23 @@
 			$("#inventory_chestplate").hide();
 			$("#inventory_gloves").hide();
 			$("#inventory_boots").hide();
+
+			// area1_bossBattle part1 pre-battle
+			setTimeout(function () {
+				$("#area1_bossBattle").show();
+
+				setTimeout(function () {
+					$("#inventory").show();
+					$("#inventory_primary_weapon").show();
+					setTimeout(function () {
+						addToInventory("area1_sword");
+						addToInventory("area1_staff");
+						addToInventory("area1_bow");
+						addToInventory("area1_dagger");
+						renderInventroy();
+					}, 1000);
+				}, 1500);
+			}, 500);
 		});
 		</script>
 	</body>
