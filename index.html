@@ -55,7 +55,7 @@
 								</div>
 							</div>
 							<h4>Combat Log</h3>
-							<table>
+							<table class="table">
 								<thead>
 									<tr>
 										<th>Who</th>
@@ -64,7 +64,7 @@
 								</thead>
 								<tbody id="battle_combatLog">
 								</tbody>
-							</div>
+							</table>
 							<div id="battle_finish">
 								<button type="button" class="btn btn-primary" id="battle_finish_btn">Close Battle</button>
 							</div>
@@ -83,6 +83,13 @@
 								<h2>Part 2</h2>
 								You pull your <span id="area1_postEquip_itemName"></span> and meet it with <em class="area1_boss">Ada-Ra</em>'s mighty sword.
 								<button class="btn btn-primary" id="area1_startBattle">Start Battle</button>
+							</div>
+							<div id="area1_battleWin" style="display: none;">
+								<h2>Part 2</h2>
+								Congratulations you have defeated <em class="area1_boss">Ada-Ra, King of Elements</em>.
+								<div class="jumbotron">
+									<h1>Game, Over! You WIN</h1>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -300,9 +307,11 @@
 				item_emit(str, "add", []);
 			}
 
-			function char_getWeaponDamage() {
+			function char_getWeaponDamage(foeArmor) {
 				var currentWeapon = item_get(charactor.equipped["primary_weapon"]);
 				var dmg = rand(currentWeapon.stats.minAttack, currentWeapon.stats.maxAttack);
+
+				dmg *= foeArmor;
 
 				item_emit(charactor.equipped["primary_weapon"], "swing", [dmg]);
 				return dmg;
@@ -337,9 +346,9 @@
 			}
 
 			function battle_log(who, logText) {
-				$("#battle_combatLog").append(e("tr", {}, [
-					who ? e("strong", {}, "You") : monster_get(currentBattle.foe).displayElement.cloneNode(true),
-					e("span", {}, logText)]));
+				$("#battle_combatLog").append(e("tr", {}, [e("td", {}, 
+					who ? e("strong", {}, "You") : monster_get(currentBattle.foe).displayElement.cloneNode(true)),
+					e("td", {}, e("span", {}, logText))]));
 			}
 
 			function battle_attack() {
@@ -468,8 +477,12 @@
 
 			function area1_beginBossBattle() {
 				console.log("area1_beginBossBattle");
-				battle_begin("area1_boss", function () {
+				battle_begin("area1_boss", function (victroy) {
+					if (victroy) {
+						$("#area1_battleWin").show();
+					} else {
 
+					}
 				});
 			}
 
