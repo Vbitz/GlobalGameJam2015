@@ -145,7 +145,12 @@
 					</table>
 				</div>
 				<div class="col-md-6" id="area2_chat" style="display: none;">
-					<ul id="area2_chat_messages">
+					<table class="table table-striped">
+						<tbody id="area2_chat_messages">
+							
+
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -670,7 +675,7 @@
 				}, (area2_roles.length / 2) * 1000);
 			}
 
-			function area2_generateComment() {
+			function area2_generateCommentNickname() {
 				var name = "";
 				if (Math.random() > 0.5) {
 					name += area2_nicknames[rand(0, area2_nicknames.length)];
@@ -700,7 +705,16 @@
 			}
 
 			function area2_chat_begin() {
+				$("#area2_chat").show();
+				var messageCount = 0,
+					currentMessageCount = 0;
+				function addNewMessage() {
+					if (messageCount > 1000) {
 
+					} else {
+
+					}
+				}
 			}
 
 			window.area2_start = area2_start;
