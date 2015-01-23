@@ -284,7 +284,7 @@
 					var itemData = item_get(item);
 					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
 						var ele = null;
-						var display = e("span", {}, [e("span", {}, itemData.displayName + " "), e("strong", {}, itemData.stats.minAttack + "-" + itemData.stats.maxAttack + " " + itemData.stats.type Damage")]);
+						var display = e("span", {}, [e("span", {}, itemData.displayName + " "), e("strong", {}, itemData.stats.minAttack + "-" + itemData.stats.maxAttack + " " + itemData.stats.type + " Damage")]);
 						if (char_itemEquiped(item)) {
 							ele = e("li", {"class": "active"}, e("a", {"data-name": itemData.name}, display));
 						} else {
