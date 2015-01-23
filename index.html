@@ -21,7 +21,7 @@
 				<button type="button" class="btn btn-primary">What do I do now?</button>
 			</div>
 
-			<div class="row">
+			<div class="row" id="gameContainer">
 				<div class="col-md-4">
 					<h2>Current Events</h2>
 					<div id="currentEvents">
@@ -130,6 +130,16 @@
 							</ul>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="row" id="area2_credits">
+				<div class="col-md-6 col-md-offset-3">
+					<table class="table table-striped">
+						<tbody id="area2_credits_table">
+
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -533,12 +543,19 @@
 				"Director",
 				"Lead Gameplay Programmer",
 				"Lead Engine Programmer",
-				"Senior Gameplay Programmer", "", "", "", "",
-				"Gameplay Programmer", "", "", "", "", "", "",
-				"Senior Engine Programmer", "", "", "", "",
-				"Engine Programmer", "", "", "", "", "", "",
+				"Senior Gameplay Programmer", "", "", "",
+				"Gameplay Programmer", "", "", "", "", "",
+				"Senior Engine Programmer", "", "", "",
+				"Engine Programmer", "", "", "", "", "",
 				"Tools Programmer", "",
-				"Lead Artist", "", "", "", ""
+				"Lead Artist",
+				"Senior Artist", "", "", "", "",
+				"Artist", "", "", "", "", "", "",
+				"Head of IT Support",
+				"IT Support", "",
+				"Building Manager",
+				"Janitor", "",
+				"Special Thanks", "", "", ""
 			];
 
 			// UOW Computer Science Staff
@@ -597,7 +614,8 @@
 			];
 
 			function area2_start() {
-
+				// Build credits
+				$("gameContainer").hide();
 			}
 
 			area1_start();
