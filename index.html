@@ -22,11 +22,13 @@
 					<div id="partList">
 						<div id="area1_bossBattle">
 							<div id="area1_prologe">
-								<h2>Prologue</h2>
+								<h2>Part 1</h2>
 								After the end of your long quest you reach your final goal. <em class="boss-ada-ra">Ada-Ra, King of Elements</em> reaches out to touch his sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
 							</div>
-							<div id="area1_postEquip">
-								You pull your <span id="area1_postEquip_itemName"></span> and 
+							<div id="area1_postEquip" style="display: none;">
+								<h2>Part 2</h2>
+								You pull your <span id="area1_postEquip_itemName"></span> and meet it with <em class="boss-ada-ra">Ada-Ra</em> mighty sword.
+								<button class="btn btn-primary" id="area1_startBattle">Start Battle</button>
 							</div>
 						</div>
 					</div>
@@ -237,7 +239,7 @@
 			function area1_getItemEvents() {
 				return {
 					"equip": function () {
-						area1_equipedItem();
+						area1_equipedItem(this.name);
 					},
 					"swing": function () {
 						area1_swingItem(this.name);
@@ -245,8 +247,18 @@
 				};
 			}
 
-			function area1_equipedItem() {
+			function area1_equipedItem(itemName) {
 				console.log("area1_equipedItem");
+				$("#area1_postEquip").show();
+				$("#area1_postEquip_itemName").text(item_get(itemName).displayName);
+				$("#area1_startBattle").click(function (e) {
+					e.preventDefault();
+					area1_beginBossBattle();
+				});
+			}
+
+			function area1_beginBossBattle() {
+				console.log("area1_beginBossBattle");
 			}
 
 			function area1_swingItem(itemName) {
