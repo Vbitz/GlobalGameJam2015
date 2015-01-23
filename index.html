@@ -7,7 +7,7 @@
 
 		<style type="text/css">
 			.boss-ada-ra {
-				
+				text-shadow: 1px 1px 1px #FFD700;
 			}
 		</style>
 	</head>
@@ -17,19 +17,31 @@
 			<h1>GGJGame 2015</h1>
 
 			<div class="row">
-				<div class="col-mid-8">
+				<div class="col-md-8">
 					<div id="partList">
 						<div id="area1_bossBattle">
 							<div id="area1_prologe">
 								<h2>Prologue</h2>
-								After the end of your long quest you reach your final goal, <em class="boss-ada-ra">"Ada-Ra, King of Elements"</em>.
-								<em class="boss-ada-ra">Ada-Ra</em> reaches out to touch your sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
+								After the end of your long quest you reach your final goal. <em class="boss-ada-ra">Ada-Ra, King of Elements</em> reaches out to touch your sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="">
-					
+				<div class="col-md-4">
+					<div id="inventroy">
+						<ul class="nav nav-pills nav-stacked">
+
+						</ul>
+						<ul class="nav nav-pills nav-stacked">
+
+						</ul>
+						<ul class="nav nav-pills nav-stacked">
+
+						</ul>
+						<ul class="nav nav-pills nav-stacked">
+
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -39,6 +51,14 @@
 			$("#partList").children().each(function (i, element) {
 				$(element).hide();
 			});
+
+			setTimeout(function () {
+				$("#area1_bossBattle").show();
+
+				setTimeout(function () {
+					$("#inventroy").show();
+				}, 1500);
+			}, 500);
 		});
 		</script>
 	</body>
