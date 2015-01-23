@@ -731,6 +731,10 @@
 				return area2_comments[rand(0, area2_comments.length)];
 			}
 
+			function area2_genUserColor() {
+				return "black";
+			}
+
 			function area2_chat_begin() {
 				console.log("area2_chat_begin");
 				$("#area2_chat").show();
@@ -742,15 +746,15 @@
 					if (messageCount > 1000) {
 
 					} else {
-						if (currentMessageCount > 20) {
+						if (currentMessageCount > 15) {
 							$("#area2_chat_messages").find("tr:first").remove();
 						}
-						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
+						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;", "color": area2_genUserColor()}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
 
 						messageCount++;
 						currentMessageCount++;
 
-						setTimeout(addNewMessage, rand(50, 200));
+						setTimeout(addNewMessage, rand(15, 50));
 					}
 				}
 				addNewMessage();
