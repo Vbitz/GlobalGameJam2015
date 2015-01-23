@@ -35,11 +35,21 @@
 							<h4>Current Turn</h4>
 							<div class="btn-group" role="group" aria-label="battle_actions">
 								<button type="button" class="btn btn-primary" id="battle_attackButton">Attack</button>
-								<div class="btn-group">
+								
+								<div class="btn-group" id="battle_castSpell" style="display: none;">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 										Cast Spell <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu" id="battle_spellList">
+
+									</ul>
+								</div>
+
+								<div class="btn-group" id="battle_useItem" style="display: none;">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+										Use Item <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu" id="battle_itemList">
 
 									</ul>
 								</div>
@@ -348,6 +358,10 @@
 			function battle_end() {
 				var victroy = false;
 
+				if (currentBattle.foeHealth < 0 && currentBattle.ownHealth > 0) {
+					victroy = true;
+				}
+
 				$("#battle").hide();
 
 				currentBattle.callback(victroy);
@@ -371,7 +385,7 @@
 				battle_attack();
 			});
 
-			// area1: Prologe + credits
+			// area1: Prologue + credits
 			function area1_start() {
 				$("#area1_bossBattle").show();
 
