@@ -23,13 +23,13 @@
 						<div id="battle">
 							<h3>Battle with: <span id="battle_monstorName"></span></h3>
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width: 60%;">
-									60%
+								<div class="progress-bar" role="progressbar" id="battle_myHealth" style="width: 60%;">
+									<strong>My Health: </strong><span id="battle_myHealthText">60%</span>
 								</div>
 							</div>
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width: 60%;">
-									60%
+								<div class="progress-bar" role="progressbar" id="battle_myHealth" style="width: 60%;">
+									<strong>Enemy Health: </strong><span id="battle_foeHealthText">60%</span>
 								</div>
 							</div>
 							<h4>Current Turn</h4>
@@ -61,7 +61,7 @@
 							</div>
 							<div id="area1_postEquip" style="display: none;">
 								<h2>Part 2</h2>
-								You pull your <span id="area1_postEquip_itemName"></span> and meet it with <em class="area1_boss">Ada-Ra</em> mighty sword.
+								You pull your <span id="area1_postEquip_itemName"></span> and meet it with <em class="area1_boss">Ada-Ra</em>'s mighty sword.
 								<button class="btn btn-primary" id="area1_startBattle">Start Battle</button>
 							</div>
 						</div>
@@ -294,10 +294,18 @@
 				charactor.spells.forEach(function (spellName) {
 
 				});
+
+				battle_renderHealth();
 			}
 
 			function battle_attack() {
 
+			}
+
+			function battle_renderHealth() {
+				var myHealthValue = (currentBattle.ownHealth / currentBattle.ownMaxHealth * 100).toFixed(2) + "%",
+					foeHealthValue = () + "%";
+				$("#battle_myHealth")
 			}
 
 			function battle_processTurn() {
