@@ -22,6 +22,16 @@
 					<div id="currentEvents">
 						<div id="battle">
 							<h3>Battle with: <span id="battle_monstorName"></span></h3>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 60%;">
+									60%
+								</div>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 60%;">
+									60%
+								</div>
+							</div>
 							<h4>Current Turn</h4>
 							<div class="btn-group" role="group" aria-label="battle_actions">
 								<button type="button" class="btn btn-primary" id="battle_attackButton">Attack</button>
@@ -191,14 +201,16 @@
 
 			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 20,
-				maxAttack: 100
+				maxAttack: 100,
+				health: 100
 			}, {
 			});
 
 			var charactor = {
 				stats: {
 					level: 1,
-					armor: 10
+					armor: 10,
+					health: 100
 				},
 				equipped: {},
 				inventory: {},
@@ -261,21 +273,35 @@
 			}
 
 			var currentBattle = {
+				foe: null,
+				ownMaxHealth: null,
+				ownHealth: null,
+				foeMaxHealth: null,
+				foeHealth: null,
 				callback: null
 			};
 
 			function battle_begin(monstorName, cb) {
+				currentBattle.foe = monstorName;
+				currentBattle.ownHealth = currentBattle.ownMaxHealth = charactor.stats.health;
+				currentBattle.foeHealth = currentBattle.foeMaxHealth =  monstor_get(monstorName).stats.health;
 				currentBattle.callback = cb;
 
 				$("#battle").show();
 				$("#battle_monstorName").empty().append(monstor_get(monstorName).displayElement.cloneNode(true));
 
-
-
 				// Build spell list
 				charactor.spells.forEach(function (spellName) {
 
 				});
+			}
+
+			function battle_attack() {
+
+			}
+
+			function battle_processTurn() {
+
 			}
 
 			function battle_end() {
@@ -297,6 +323,10 @@
 			$("#inventory_boots").hide();
 
 			$("#battle").hide();
+			$("#battle_attackButton").click(function (e) {
+				e.preventDefault();
+				battle_attack();
+			});
 
 			// area1_bossBattle part1 pre-battle
 			function area1_start() {
