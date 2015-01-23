@@ -22,6 +22,18 @@
 					<div id="currentEvents">
 						<div id="battle">
 							<h3>Battle with: <span id="battle_monstorName"></span></h3>
+							<h4>Current Turn</h4>
+							<div class="btn-group" role="group" aria-label="battle_actions">
+								<button type="button" class="btn btn-primary" id="battle_attackButton">Attack</button>
+								<div class="btn-group">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+										Cast Spell <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu" id="battle_spellList">
+
+									</ul>
+								</div>
+							</div>
 							<h4>Combat Log</h3>
 							<div id="battle_combatLog">
 
@@ -82,6 +94,8 @@
 				</div>
 			</div>
 		</div>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 		<script type="text/javascript">
 		$(document).ready(function () {
@@ -255,6 +269,13 @@
 
 				$("#battle").show();
 				$("#battle_monstorName").empty().append(monstor_get(monstorName).displayElement.cloneNode(true));
+
+
+
+				// Build spell list
+				charactor.spells.forEach(function (spellName) {
+
+				});
 			}
 
 			function battle_end() {
