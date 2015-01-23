@@ -158,10 +158,26 @@
 
 			var worldMonstors = {};
 
+			function monstor_regster(id, displayElement, stats, events) {
+				worldMonstors[id] = {
+					id: id,
+					displayElement: displayElement,
+					stats: stats,
+					events: events
+				}
+			}
 
-			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}))
+			monstor_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
+				minAttack: 20,
+				maxAttack: 100
+			}, {
+			});
 
 			var charactor = {
+				stats: {
+					level: 1,
+					armor: 10
+				},
 				equipped: {},
 				inventory: {},
 				spells: []
@@ -222,8 +238,18 @@
 				item_emit(str, "add", []);
 			}
 
-			function battle_begin(monstorName) {
+			var currentBattle = {
+				callback: null
+			};
 
+			function battle_begin(monstorName, cb) {
+				currentBattle.callback = cb;
+			}
+
+			function battle_end() {
+				var victroy = false;
+
+				currentBattle.callback(victroy);
 			}
 
 			// Hide inital items
