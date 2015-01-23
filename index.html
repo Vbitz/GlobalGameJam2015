@@ -2,15 +2,30 @@
 	<head>
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
 	</head>
 
 	<body>
 		<div class="container">
 			<h1>GGJGame 2015</h1>
 
-			<div class="partList">
-
+			<div id="partList">
+				<div id="area1_bossBattle">
+					<div id="area1_prologe">
+						After the end of your long quest you reach your final goal, <strong>"Ada-Ra, King of Elements"</strong>.
+						Ada-Ra
+					</div>
+				</div>
 			</div>
 		</div>
+
+		<script type="text/javascript">
+		$(document).ready(function () {
+			$("#partList").children().each(function (i, element) {
+				console.log(element);
+			});
+		});
+		</script>
 	</body>
 </html>
