@@ -72,7 +72,17 @@
 			}
 
 			function appendElements(ele, child) {
-
+				if (typeof child == "string") {
+					ele.textContent = child;
+				} else if (typeof child == "object" && child instanceof Array) {
+					child.forEach(function (subChild) {
+						appendElements(ele, subChild);
+					});
+				} else if (child instanceof HTMLElement) {
+					ele.appendChild(child);
+				} else {
+					ele.textContent = child.toString();
+				}
 			}
 
 			function e(type, attrs, body) {
@@ -106,11 +116,20 @@
 				}
 			}
 
+			function item_get(itemName) {
+				if (inventoryItems[itemName] === undefined) {
+					throw new Error("Item does not exist: " + str);
+				} else {
+					return inventoryItems[itemName];
+				}
+			}
+
 			function weapon_makeStats(minAttack, maxAttack, type) {
 				return {
 					minAttack: minAttack,
 					maxAttack: maxAttack,
-					type: type
+					type: type,
+					slot: "primaryWeapon"
 				};
 			}
 
@@ -121,7 +140,7 @@
 
 			var charactor = {
 				equipped: {},
-				inventory: [],
+				inventory: {},
 				spells: []
 			};
 
@@ -132,13 +151,18 @@
 				$("#inventory_chestplate>ul").empty();
 				$("#inventory_gloves>ul").empty();
 				$("#inventory_boots>ul").empty();
+
+				for (var item in player.inventory) {
+					
+				}
 			}
 
 			function char_addToInventory(str) {
 				if (inventoryItems[str] === undefined) {
 					throw new Error("Item does not exist: " + str);
 				}
-				player.inventory.push(inventoryItems[str]);
+
+				player.inventory.push({name: str, count: 1});
 			}
 
 			// Hide inital items
