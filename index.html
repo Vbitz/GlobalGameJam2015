@@ -4,18 +4,32 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+
+		<style type="text/css">
+			.boss-ada-ra {
+				
+			}
+		</style>
 	</head>
 
 	<body>
 		<div class="container">
 			<h1>GGJGame 2015</h1>
 
-			<div id="partList">
-				<div id="area1_bossBattle">
-					<div id="area1_prologe">
-						After the end of your long quest you reach your final goal, <strong>"Ada-Ra, King of Elements"</strong>.
-						Ada-Ra
+			<div class="row">
+				<div class="col-mid-8">
+					<div id="partList">
+						<div id="area1_bossBattle">
+							<div id="area1_prologe">
+								<h2>Prologue</h2>
+								After the end of your long quest you reach your final goal, <em class="boss-ada-ra">"Ada-Ra, King of Elements"</em>.
+								<em class="boss-ada-ra">Ada-Ra</em> reaches out to touch your sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
+							</div>
+						</div>
 					</div>
+				</div>
+				<div class="">
+					
 				</div>
 			</div>
 		</div>
@@ -23,7 +37,7 @@
 		<script type="text/javascript">
 		$(document).ready(function () {
 			$("#partList").children().each(function (i, element) {
-				console.log(element);
+				$(element).hide();
 			});
 		});
 		</script>
