@@ -136,7 +136,7 @@
 
 			<div class="jumbotron" id="area1_win" style="display: none;">
 				<h1>Game, Over! You WIN.</h1>
-				<button type="button" class="btn btn-primary">Credits...</button>
+				<button type="button" class="btn btn-primary" id="area1_end_button">Credits...</button>
 			</div>
 
 			<div class="row" id="gameContainer">
@@ -212,6 +212,11 @@
 							<div id="area1_battleWin" style="display: none;">
 								<h2>Part 45</h2>
 								Congratulations you have defeated <em class="area1_boss">Ada-Ra, King of Elements</em>.
+							</div>
+						</div>
+						<div id="area3_intro">
+							<div id="area3_intro_text">
+								<h2>Part 1: A new beginning</h2>
 							</div>
 						</div>
 					</div>
@@ -680,6 +685,9 @@
 					if (victroy) {
 						$("#area1_battleWin").show();
 						$("#area1_win").show();
+						$("#area1_end_button").click(function () {
+							area2_start();
+						});
 					} else {
 						// What am I going to do about losses, easier difficulty
 					}
@@ -920,16 +928,21 @@
 				$("#gameContainer").show();
 				$("body").attr("class", "");
 				$("#area2_credits").hide();
+				$("#area2_chat").hide();
+				$("#area2_endJumbotron").hide();
+				$("#area1_bossBattle").hide();
+
+				setTimeout(area3_start, 500);
 			}
 
 			function area3_start() {
-
+				$("#area3_intro").show();
 			}
 
 			window.area2_start = area2_start;
-			window.area3_start = area3_start;
-
-			console.log(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
+			window.area3_start = function () {
+				area2_end();
+			};
 
 			area1_start();
 		});
