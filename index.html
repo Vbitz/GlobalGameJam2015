@@ -16,10 +16,14 @@
 					opacity: 100%;
 				}
 
+				25% {
+					text-shadow: 0px 0px 100px white;
+				}
+
 				100% {
 					transform: rotateZ(0deg);
 					transform: scale(0.75, 0.75) perspective(5000px) rotateX(45deg);
-					opacity: 0%;
+					opacity: 1%;
 				}
 			}
 
@@ -29,21 +33,25 @@
 					opacity: 100%;
 				}
 
+				25% {
+					text-shadow: 0px 0px 100px white;
+				}
+
 				100% {
 					transform: rotateZ(0deg);
 					transform: scale(0.75, 0.75) perspective(5000px) rotateX(45deg);
-					opacity: 0;
+					opacity: 1%;
 				}
 			}
 
 			.area2_postCredits {
-				animation-duration: 6s;
+				animation-duration: 10s;
 				animation-name: roll;
-				-webkit-animation-duration: 6s;
+				-webkit-animation-duration: 10s;
 				-webkit-animation-name: roll;
 				transform: scale(0.75, 0.75) perspective(5000px) rotateX(45deg);
 				transform-origin: 50% 0;
-				opacity: 0;
+				opacity: 1%;
 			}
 
 			@keyframes fadeToBlack {
@@ -81,9 +89,9 @@
 			}
 
 			.area2_postCredits_body {
-				animation-duration: 15s;
+				animation-duration: 10s;
 				animation-name: fadeToBlack;
-				-webkit-animation-duration: 15s;
+				-webkit-animation-duration: 10s;
 				-webkit-animation-name: fadeToBlack;
 				opacity: 25%;
 				color: white;
@@ -218,7 +226,7 @@
 			<div class="row" id="area2_credits" style="display: none;">
 				<div class="col-md-6 col-md-offset-3" id="area2_credits_area">
 					<h2>Credits</h2>
-					<table class="table table-striped">
+					<table class="table">
 						<tbody id="area2_credits_table">
 
 						</tbody>
@@ -226,7 +234,7 @@
 				</div>
 				<div class="col-md-6" id="area2_chat" style="display: none;">
 					<h2>Live Chat</h2>
-					<table class="table table-striped">
+					<table class="table">
 						<tbody id="area2_chat_messages">
 							
 
