@@ -417,7 +417,7 @@
 				return ret;
 			}
 
-			function monstor_makeStatsFromLevel(level, boss) {
+			function monster_makeStatsFromLevel(level, boss) {
 				return {
 					minAttack: Math.floor(Math.pow(level, 1.1) * (boss ? 20 : 10)),
 					maxAttack: Math.floor(Math.pow(level, 1.1) * (boss ? 25 : 15)),
@@ -433,7 +433,7 @@
 			}
 
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"),
-				monstor_makeStatsFromLevel(8, true), {
+				monster_makeStatsFromLevel(8, true), {
 			});
 
 			var character = {
@@ -978,6 +978,11 @@
 				setTimeout(function area3_nextBattle() {
 					battle_begin("area3_number" + currentNumber++, area3_nextBattle);
 				}, 1000);
+			}
+
+			for (var i = 0; i < 100; i++) {
+				monster_regster("area3_number" + i, e("em", {}, area2_generateCommentNickname()),
+					monster_makeStatsFromLevel(i, i % 5 == 0), {});
 			}
 
 			window.area2_start = area2_start;
