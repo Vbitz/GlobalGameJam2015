@@ -124,10 +124,11 @@
 				-webkit-animation-duration: 3s;
 				-webkit-animation-name: fadeIn;
 
+				opacity: 1%;
 				position: fixed;
 				bottom: 20px;
-				height: 400px;
-				width: 100%;
+				height: 300px;
+				width: 97%;
 				color: black;
 				background-color: white;
 			}
@@ -422,7 +423,7 @@
 			}, {
 			});
 
-			var charactor = {
+			var character = {
 				stats: {
 					level: 1,
 					armor: 0.25,
@@ -435,7 +436,7 @@
 			};
 
 			function char_itemEquiped(itemName) {
-				return charactor.equipped[item_get(itemName).stats.slot] == itemName;
+				return character.equipped[item_get(itemName).stats.slot] == itemName;
 			}
 
 			function char_renderInventroy() {
@@ -446,8 +447,8 @@
 				$("#inventory_gloves>ul").empty();
 				$("#inventory_boots>ul").empty();
 
-				for (var item in charactor.inventory) {
-					var entryData = charactor.inventory[item];
+				for (var item in character.inventory) {
+					var entryData = character.inventory[item];
 					var itemData = item_get(item);
 					if ($("#inventory_" + itemData.stats.slot + ">ul").length > 0) {
 						var ele = null;
@@ -469,7 +470,7 @@
 			}
 
 			function char_equipItem(itemName) {
-				charactor.equipped[item_get(itemName).stats.slot] = itemName;
+				character.equipped[item_get(itemName).stats.slot] = itemName;
 				item_emit(itemName, "equip", []);
 				char_renderInventroy();
 			}
@@ -479,24 +480,24 @@
 					throw new Error("Item does not exist: " + str);
 				}
 
-				if (charactor.inventory[str] === undefined) {
-					charactor.inventory[str] = {
+				if (character.inventory[str] === undefined) {
+					character.inventory[str] = {
 						count: 0
 					};
 				}
 
-				charactor.inventory[str].count++;
+				character.inventory[str].count++;
 
 				item_emit(str, "add", []);
 			}
 
 			function char_getWeaponDamage(foeArmor) {
-				var currentWeapon = item_get(charactor.equipped["primary_weapon"]);
+				var currentWeapon = item_get(character.equipped["primary_weapon"]);
 				var dmg = rand(currentWeapon.stats.minAttack, currentWeapon.stats.maxAttack);
 
 				dmg *= foeArmor;
 
-				item_emit(charactor.equipped["primary_weapon"], "swing", [dmg]);
+				item_emit(character.equipped["primary_weapon"], "swing", [dmg]);
 				return dmg;
 			}
 
@@ -513,7 +514,7 @@
 
 			function battle_begin(monsterName, cb) {
 				currentBattle.foe = monsterName;
-				currentBattle.ownHealth = currentBattle.ownMaxHealth = charactor.stats.health;
+				currentBattle.ownHealth = currentBattle.ownMaxHealth = character.stats.health;
 				currentBattle.foeHealth = currentBattle.foeMaxHealth =  monster_get(monsterName).stats.health;
 				currentBattle.turnNumber = 0;
 				currentBattle.callback = cb;
@@ -524,12 +525,12 @@
 				$("#battle_monsterName").empty().append(monster_get(monsterName).displayElement.cloneNode(true));
 
 				// Build spell list
-				charactor.spells.forEach(function (spellName) {
+				character.spells.forEach(function (spellName) {
 
 				});
 
 				// Build item list
-				Object.keys(charactor.inventory).forEach(function (itemName) {
+				Object.keys(character.inventory).forEach(function (itemName) {
 
 				});
 
@@ -580,7 +581,7 @@
 			function battle_processTurn() {
 				// monster attack
 				
-				var foeDmg = monster_getWeaponDamage(currentBattle.foe, charactor.stats.armor);
+				var foeDmg = monster_getWeaponDamage(currentBattle.foe, character.stats.armor);
 
 				if (foeDmg > 0) {
 					battle_log(false, "Hit for " + foeDmg.toFixed(2) + " damage");
