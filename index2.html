@@ -9,8 +9,8 @@
 				border: 1px solid black;
 				margin: 0 auto;
 				display: block;
-				width: 2cm;
-				height: 10cm;
+				width: 20cm;
+				height: 20cm;
 			}
 		</style>
 	</head>
@@ -27,8 +27,6 @@
 
 			var canvasComputedStyle = window.getComputedStyle(canvas, null);
 
-			console.log(canvasComputedStyle);
-
 			var canvasWidth = parseInt(canvasComputedStyle.width.substring(0, canvasComputedStyle.width.length - 2), 10),
 				canvasHeight = parseInt(canvasComputedStyle.height.substring(0, canvasComputedStyle.height.length - 2), 10);
 
@@ -41,11 +39,13 @@
 			}
 
 			function draw() {
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 				ctx.fillStyle = currentInput ? "red" : "blue";
-				ctx.fillRect(canvas.width * 0.25, canvas.height - (canvas.width * 1.0), canvas.width * 0.5, canvas.width * 0.5);
+				ctx.rect(canvasWidth * 0.25, canvasHeight - (canvasWidth * 1.0), canvasWidth * 0.5, canvasWidth * 0.5);
 				window.requestAnimationFrame(draw);
 			}
+
+			window.requestAnimationFrame(draw);
 
 			document.addEventListener("keydown", function (e) {
 				input(true);
@@ -70,8 +70,6 @@
 			canvas.addEventListener("touchend", function (e) {
 				input(true);
 			}, true);
-
-			window.requestAnimationFrame(draw);
 		}
 		</script>
 	</body>
