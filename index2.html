@@ -3,49 +3,39 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>One Finger Clicker</title>
+	
+		<style type="text/css">
+			#userBar {
+				position: fixed;
 
-		<style>
-			#gameCanvas {
-				border: 1px solid black;
-				margin: 0 auto;
-				display: block;
-				width: 20cm;
-				height: 20cm;
+				bottom: 5%;
+				height: 10%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+
+				background-color: black;
 			}
 		</style>
 	</head>
 	<body onload="ready();">
-		<canvas id="gameCanvas"></canvas>
-	
+		<div id="gameCanvas"></div>
+		<div id="userBar"></div>
+
 		<script type="text/javascript">
 		// TODO: Implament one key gameplay
 		// TODO: Implament auto upgrading (Upgrade list that auto buys based on current points)
 		// TODO: Store save file in localStorage
 		function ready() {
-			var canvas = document.querySelector("#gameCanvas");
-			var ctx = canvas.getContext("2d");
-
-			var canvasComputedStyle = window.getComputedStyle(canvas, null);
-
-			var canvasWidth = parseInt(canvasComputedStyle.width.substring(0, canvasComputedStyle.width.length - 2), 10),
-				canvasHeight = parseInt(canvasComputedStyle.height.substring(0, canvasComputedStyle.height.length - 2), 10);
-
-			console.log(canvasWidth, canvasHeight);
-
-			var currentInput = false;
-
 			function input(down) {
-				currentInput = down;
+				console.log("input", down);
 			}
 
-			function draw() {
-				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-				ctx.fillStyle = currentInput ? "red" : "blue";
-				ctx.rect(canvasWidth * 0.25, canvasHeight - (canvasWidth * 1.0), canvasWidth * 0.5, canvasWidth * 0.5);
-				window.requestAnimationFrame(draw);
+			function update() {
+
 			}
 
-			window.requestAnimationFrame(draw);
+			setInterval(update, 1000 / 60);
 
 			document.addEventListener("keydown", function (e) {
 				input(true);
@@ -55,19 +45,19 @@
 				input(false);
 			}, true);
 
-			canvas.addEventListener("mousedown", function (e) {
+			document.addEventListener("mousedown", function (e) {
 				input(true);
 			}, true);
 
-			canvas.addEventListener("mouseup", function (e) {
+			document.addEventListener("mouseup", function (e) {
 				input(false);
 			}, true);
 
-			canvas.addEventListener("touchstart", function (e) {
+			document.addEventListener("touchstart", function (e) {
 				input(true);
 			}, true);
 
-			canvas.addEventListener("touchend", function (e) {
+			document.addEventListener("touchend", function (e) {
 				input(true);
 			}, true);
 		}
