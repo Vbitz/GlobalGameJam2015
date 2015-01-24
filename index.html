@@ -17,14 +17,14 @@
 
 				100% {
 					transform: rotateZ(0deg);
-					transform: scale(0.75, 0.75) perspective(1200px) rotateY(8deg) rotateX(45deg);
+					transform: scale(0.75, 0.75) perspective(1200px) rotateY(0deg) rotateX(45deg);
 				}
 			}
 
 			.area2_postCredits {
 				animation-duration: 4s;
 				animation-name: roll;
-				transform: scale(0.75, 0.75) perspective(1200px) rotateY(8deg) rotateX(45deg);
+				transform: scale(0.75, 0.75) perspective(1200px) rotateY(0deg) rotateX(45deg);
 				transform-origin: 50% 0;
 			}
 		</style>
@@ -693,7 +693,7 @@
 				"<< Free stuff here http://example.com/ >>",
 				"That's It?",
 				"Cam or rage",
-				"Shard of Broken Time is overpowered, maybe you should have used that instead",
+				"Shard of Broken Time is overpowered, you should use that instead",
 				"How can you even think that's a good length?",
 				"#ShortGames",
 				"#ggj2015"
@@ -777,7 +777,7 @@
 					currentMessageCount = 0;
 				function addNewMessage() {
 					//console.log("area2_addNewMessage");
-					if (messageCount > 3000) {
+					if (messageCount > 150) {
 						area2_chat_end();
 					} else {
 						if (currentMessageCount > 12) {
@@ -788,14 +788,17 @@
 						messageCount++;
 						currentMessageCount++;
 
-						setTimeout(addNewMessage, rand(5, 25));
+						setTimeout(addNewMessage, rand(50, 250));
 					}
 				}
 				addNewMessage();
 			}
 
 			function area2_chat_end() {
-
+				$("#area2_credits").attr("class", "row area2_postCredits"); // Kick off the awesome
+				$("body").attr("class", "area2_postCredits_body"); // Kick off the awesome
+				setTimeout(function () {
+				}, 10000)
 			}
 
 			function area3_start() {
