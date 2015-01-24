@@ -97,6 +97,38 @@
 				color: white;
 				background-color: black;
 			}
+
+			@keyframes fadeIn {
+				0% {
+					opacity: 1%;
+				}
+
+				100% {
+					opacity: 100%;
+				}
+			}
+
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 1%;
+				}
+
+				100% {
+					opacity: 100%;
+				}
+			}
+
+			.area2_endJumbotron {
+				animation-duration: 3s;
+				animation-name: fadeIn;
+				-webkit-animation-duration: 3s;
+				-webkit-animation-name: fadeIn;
+
+				position: fixed;
+				bottom: 20px;
+				height: 20%;
+				width: 100%;
+			}
 		</style>
 	</head>
 
@@ -241,6 +273,11 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+
+			<div class="jumbotron" id="area1_win" style="display: none;">
+				<h1>Game, Over! You WIN.</h1>
+				<button type="button" class="btn btn-primary">What do I do now?</button>
 			</div>
 		</div>
 
@@ -847,8 +884,8 @@
 					currentMessageCount = 0;
 				function addNewMessage() {
 					//console.log("area2_addNewMessage");
-					if (messageCount > 100) {
-						area2_chat_end();
+					if (messageCount > 140) {
+
 					} else {
 						if (currentMessageCount > 12) {
 							$("#area2_chat_messages").find("tr:first").remove();
@@ -857,6 +894,10 @@
 
 						messageCount++;
 						currentMessageCount++;
+
+						if (messageCount > 100) {
+							area2_chat_end();
+						}
 
 						setTimeout(addNewMessage, rand(50, 250));
 					}
@@ -868,7 +909,8 @@
 				$("#area2_credits").attr("class", "row area2_postCredits"); // Kick off the awesome
 				$("body").attr("class", "area2_postCredits_body"); // Kick off the awesome
 				setTimeout(function () {
-				}, 10000)
+					$("#area2_endJumbotron").show();
+				}, 8000);
 			}
 
 			function area3_start() {
