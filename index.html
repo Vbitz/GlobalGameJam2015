@@ -13,22 +13,26 @@
 			@keyframes roll {
 				0% {
 					transform: rotateZ(360deg);
+					opacity: 100%;
 				}
 
 				100% {
 					transform: rotateZ(0deg);
-					transform: scale(0.75, 0.75) perspective(2000px) rotateX(45deg);
+					transform: scale(0.75, 0.75) perspective(5000px) rotateX(45deg);
+					opacity: 0%;
 				}
 			}
 
 			@-webkit-keyframes roll {
 				0% {
 					transform: rotateZ(360deg);
+					opacity: 100%;
 				}
 
 				100% {
 					transform: rotateZ(0deg);
-					transform: scale(0.75, 0.75) perspective(2000px) rotateX(45deg);
+					transform: scale(0.75, 0.75) perspective(5000px) rotateX(45deg);
+					opacity: 0;
 				}
 			}
 
@@ -37,39 +41,53 @@
 				animation-name: roll;
 				-webkit-animation-duration: 6s;
 				-webkit-animation-name: roll;
-				transform: scale(0.75, 0.75) perspective(2000px) rotateX(45deg);
+				transform: scale(0.75, 0.75) perspective(5000px) rotateX(45deg);
 				transform-origin: 50% 0;
+				opacity: 0;
 			}
 
-			@keyframes roll {
+			@keyframes fadeToBlack {
 				0% {
-					transform: rotateZ(360deg);
 					color: black;
+					background-color: white;
+				}
+
+				75% {
+					color: white;
+					opacity: 100%;
 				}
 
 				100% {
-					transform: rotateZ(0deg);
-					transform: scale(0.75, 0.75) perspective(2000px) rotateX(45deg);
-					color: white;
+					opacity: 25%;
+					background-color: black;
 				}
 			}
 
-			@-webkit-keyframes roll {
+			@-webkit-keyframes fadeToBlack {
 				0% {
-					transform: rotateZ(360deg);
+					color: black;
+					background-color: white;
+				}
+
+				75% {
+					color: white;
+					opacity: 100%;
 				}
 
 				100% {
-					transform: rotateZ(0deg);
-					transform: scale(0.75, 0.75) perspective(2000px) rotateX(45deg);
+					opacity: 25%;
+					background-color: black;
 				}
 			}
 
 			.area2_postCredits_body {
-				animation-duration: 6s;
+				animation-duration: 15s;
 				animation-name: fadeToBlack;
-				-webkit-animation-duration: 6s;
+				-webkit-animation-duration: 15s;
 				-webkit-animation-name: fadeToBlack;
+				opacity: 25%;
+				color: white;
+				background-color: black;
 			}
 		</style>
 	</head>
