@@ -5,6 +5,8 @@
 		<style>
 			canvas {
 				border: 1px solid black;
+				margin: 0 auto;
+				display: block;
 			}
 		</style>
 	</head>
@@ -19,23 +21,41 @@
 			var canvas = document.querySelector("#gameCanvas");
 			var ctx = canvas.getContext("2d");
 
+			var currentInput = false;
+
+			function input(down) {
+				currentInput = down;
+			}
+
 			function draw() {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.fillRect(canvas.width * 0.25, canvas.height - (canvas.width * 1.0), canvas.width * 0.5, canvas.width * 0.5);
 				window.requestAnimationFrame(draw);
 			}
 
-			canvas.addEventListener("keyDown", function (e) {
-				console.log(e);
+			document.addEventListener("keydown", function (e) {
+				input(true);
 			}, true);
 
-			canvas.addEventListener("click", function (e) {
+			document.addEventListener("keyup", function (e) {
+				input(false);
+			}, true);
 
+			canvas.addEventListener("mousedown", function (e) {
+				input(true);
+			}, true);
+
+			canvas.addEventListener("mouseup", function (e) {
+				input(false);
 			}, true);
 
 			canvas.addEventListener("touchstart", function (e) {
-				
-			});
+				input(true);
+			}, true);
+
+			canvas.addEventListener("touchend", function (e) {
+				input(true);
+			}, true);
 
 			window.requestAnimationFrame(draw);
 		}
