@@ -110,11 +110,11 @@
 
 			@-webkit-keyframes fadeIn {
 				0% {
-					opacity: 1%;
+					opacity: 1% !important;
 				}
 
 				100% {
-					opacity: 100%;
+					opacity: 100% !important;
 				}
 			}
 
@@ -834,7 +834,7 @@
 						}
 						$("#area2_credits_table").append(e("tr", {}, [e("td", {"style": "text-align: right; font-weight: bold;"}, role), e("td", {}, area2_names[index])]));
 						creditCount++;
-					}, (index) * 500);
+					}, (index) * 450);
 				});
 
 				setTimeout(function () {
@@ -888,18 +888,19 @@
 					currentMessageCount = 0;
 				function addNewMessage() {
 					//console.log("area2_addNewMessage");
-					if (messageCount > 140) {
+					if (messageCount > 100) {
 
 					} else {
 						if (currentMessageCount > 12) {
 							$("#area2_chat_messages").find("tr:first").remove();
 						}
+
 						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;", "color": area2_genUserColor()}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
 
 						messageCount++;
 						currentMessageCount++;
 
-						if (messageCount > 100) {
+						if (messageCount > 75) {
 							area2_chat_end();
 						}
 
