@@ -1,14 +1,19 @@
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
 
 		<title>One Finger Clicker</title>
 	
 		<style type="text/css">
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
 			#userBar {
 				position: fixed;
 
-				bottom: 5%;
+				bottom: 10%;
 				height: 10%;
 				width: 100%;
 				margin: 0;
@@ -27,8 +32,16 @@
 		// TODO: Implament auto upgrading (Upgrade list that auto buys based on current points)
 		// TODO: Store save file in localStorage
 		function ready() {
+			var $userBar = document.querySelector("#userBar");
+
 			function input(down) {
 				console.log("input", down);
+
+				if (down) {
+					$userBar.style.backgroundColor = "red";
+				} else {
+					$userBar.style.backgroundColor = "blue";
+				}
 			}
 
 			function update() {
