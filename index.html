@@ -12,12 +12,16 @@
 
 			@keyframes roll {
 				0% {
-					transform: rotateZ(360deg);
 					opacity: 1;
+					transform: rotateZ(360deg);
 				}
 
-				25% {
+				12% {
 					text-shadow: 0px 0px 100px white;
+				}
+
+				50% {
+					opacity: 1;
 				}
 
 				100% {
@@ -29,12 +33,16 @@
 
 			@-webkit-keyframes roll {
 				0% {
-					transform: rotateZ(360deg);
 					opacity: 1;
+					transform: rotateZ(360deg);
 				}
 
-				25% {
+				12% {
 					text-shadow: 0px 0px 100px white;
+				}
+
+				50% {
+					opacity: 1;
 				}
 
 				100% {
@@ -45,9 +53,9 @@
 			}
 
 			.area2_postCredits {
-				animation-duration: 10s;
+				animation-duration: 20s;
 				animation-name: roll;
-				-webkit-animation-duration: 10s;
+				-webkit-animation-duration: 20s;
 				-webkit-animation-name: roll;
 				transform-origin: 50% 0;
 				transform: scale(0.5, 0.5) perspective(5000px) rotateX(45deg);
@@ -267,8 +275,7 @@
 
 			<div class="jumbotron area2_endJumbotron" id="area2_endJumbotron" style="display: none;">
 				<h1>You think you are done right?</h1>
-				<p>Some people would call that a disappointment I call it a character creation.</p>
-				<button type="button" class="btn btn-primary">What do I do now?</button>
+				<button type="button" class="btn btn-primary" id="area2_end">Let's Begin.</button>
 			</div>
 		</div>
 
@@ -827,7 +834,11 @@
 				setTimeout(function () {
 					// active web streaming chat simulator
 					area2_chat_begin();
-				}, (area2_roles.length / 4) * 1000);
+				}, (area2_roles.length / 4) * 450);
+
+				$("#area2_end").click(function () {
+					area2_end();
+				});
 			}
 
 			function area2_generateCommentNickname() {
@@ -903,6 +914,12 @@
 				setTimeout(function () {
 					$("#area2_endJumbotron").show();
 				}, 8000);
+			}
+
+			function area2_end() {
+				$("#gameContainer").show();
+				$("body").attr("class", "");
+				$("#area2_credits").hide();
 			}
 
 			function area3_start() {
