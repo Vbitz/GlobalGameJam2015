@@ -404,8 +404,17 @@
 				var dmg = rand(monster.stats.minAttack, monster.stats.maxAttack);
 
 				dmg *= foeArmor;
+				
+				var ret = [dmg];
 
-				return dmg;
+				if (Math.random() > monster.stats.critChance) {
+					ret[0] *= monster.stats.critMutiply;
+					for (var i = 0; i < monster.stats.critAttacks - 1; i++) {
+						ret.push(monster.stats.minAttack * foeArmor);
+					}
+				}
+
+				return ret;
 			}
 
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
@@ -497,7 +506,16 @@
 				dmg *= foeArmor;
 
 				item_emit(character.equipped["primary_weapon"], "swing", [dmg]);
-				return dmg;
+				var ret = [dmg];
+
+				if (Math.random() > currentWeapon.stats.critChance) {
+					ret[0] *= currentWeapon.stats.critMutiply;
+					for (var i = 0; i < currentWeapon.stats.critAttacks - 1; i++) {
+						ret.push(currentWeapon.stats.minAttack * foeArmor);
+					}
+				}
+
+				return ret;
 			}
 
 			var currentBattle = {
