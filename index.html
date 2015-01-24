@@ -393,7 +393,7 @@
 
 			function monster_get(monsterName) {
 				if (worldmonsters[monsterName] === undefined) {
-					throw new Error("monster does not exist: " + str);
+					throw new Error("monster does not exist: " + monsterName);
 				} else {
 					return worldmonsters[monsterName];
 				}
@@ -435,8 +435,6 @@
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"),
 				monstor_makeStatsFromLevel(8, true), {
 			});
-
-			console.log(monstor_makeStatsFromLevel(8, true));
 
 			var character = {
 				stats: {
@@ -975,6 +973,11 @@
 
 			function area3_start() {
 				$("#area3_intro").show();
+
+				var currentNumber = 0;
+				setTimeout(function area3_nextBattle() {
+					battle_begin("area3_number" + currentNumber++, area3_nextBattle);
+				}, 1000);
 			}
 
 			window.area2_start = area2_start;
