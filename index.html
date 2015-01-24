@@ -22,9 +22,9 @@
 			</div>
 
 			<div class="row" id="gameContainer">
-				<button type="button" class="btn btn-default" onclick="area2_start();">Skip Area 1</button>
-
 				<div class="col-md-4">
+					<button type="button" class="btn btn-default" onclick="area2_start();">Warp to Area 2</button>
+					<button type="button" class="btn btn-default" onclick="area3_start();">Warp to Area 3</button>
 					<h2>Current Events</h2>
 					<div id="currentEvents">
 						<div id="battle">
@@ -686,9 +686,15 @@
 
 				$("#area2_credits").show();
 
+				var creditCount = 0;
+
 				area2_roles.forEach(function (role, index) {
 					setTimeout(function () {
+						if (creditCount > 15) {
+							$("#area2_credits_table").find("tr:first").remove();
+						}
 						$("#area2_credits_table").append(e("tr", {}, [e("td", {"style": "text-align: right; font-weight: bold;"}, role), e("td", {}, area2_names[index])]));
+						creditCount++;
 					}, (index) * 1000);
 				});
 
@@ -742,9 +748,9 @@
 				var messageCount = 0,
 					currentMessageCount = 0;
 				function addNewMessage() {
-					console.log("area2_addNewMessage");
-					if (messageCount > 1000) {
-
+					//console.log("area2_addNewMessage");
+					if (messageCount > 3000) {
+						area2_chat_end();
 					} else {
 						if (currentMessageCount > 15) {
 							$("#area2_chat_messages").find("tr:first").remove();
@@ -754,13 +760,22 @@
 						messageCount++;
 						currentMessageCount++;
 
-						setTimeout(addNewMessage, rand(15, 50));
+						setTimeout(addNewMessage, rand(5, 25));
 					}
 				}
 				addNewMessage();
 			}
 
+			function area2_chat_end() {
+
+			}
+
+			function area3_start() {
+
+			}
+
 			window.area2_start = area2_start;
+			window.area3_start = area3_start;
 
 			console.log(e("tr", {}, [e("td", {style: "font-weight: bold;"}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
 
