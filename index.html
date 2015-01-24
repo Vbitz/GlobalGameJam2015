@@ -9,6 +9,24 @@
 			.area1_boss {
 				text-shadow: 1px 1px 1px #FFD700;
 			}
+
+			@keyframes roll {
+				0% {
+					transform: rotateZ(360deg);
+				}
+
+				100% {
+					transform: rotateZ(0deg);
+					transform: scale(0.75, 0.75) perspective(1200px) rotateY(8deg) rotateX(45deg);
+				}
+			}
+
+			.area2_postCredits {
+				animation-duration: 4s;
+				animation-name: roll;
+				transform: scale(0.75, 0.75) perspective(1200px) rotateY(8deg) rotateX(45deg);
+				transform-origin: 50% 0;
+			}
 		</style>
 	</head>
 
@@ -283,12 +301,14 @@
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
 				minAttack: 50,
 				maxAttack: 200,
-				health: 5672,
+				
 				critChance: 0.9,
 				critAttacks: 1,
-				critMutiply: 0.2
+				critMutiply: 0.2,
+
 				armor: 0.7,
-				level: 1
+				level: 1,
+				health: 5672,
 			}, {
 			});
 
