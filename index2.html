@@ -5,17 +5,17 @@
 		<title>One Finger Clicker</title>
 
 		<style>
-			canvas {
+			#gameCanvas {
 				border: 1px solid black;
 				margin: 0 auto;
 				display: block;
-				width: 3cm;
-				height: 15cm;
+				width: 2cm;
+				height: 10cm;
 			}
 		</style>
 	</head>
 	<body onload="ready();">
-		<canvas id="gameCanvas" width="3cm" height="15cm"></canvas>
+		<canvas id="gameCanvas"></canvas>
 	
 		<script type="text/javascript">
 		// TODO: Implament one key gameplay
@@ -24,6 +24,15 @@
 		function ready() {
 			var canvas = document.querySelector("#gameCanvas");
 			var ctx = canvas.getContext("2d");
+
+			var canvasComputedStyle = window.getComputedStyle(canvas, null);
+
+			console.log(canvasComputedStyle);
+
+			var canvasWidth = parseInt(canvasComputedStyle.width.substring(0, canvasComputedStyle.width.length - 2), 10),
+				canvasHeight = parseInt(canvasComputedStyle.height.substring(0, canvasComputedStyle.height.length - 2), 10);
+
+			console.log(canvasWidth, canvasHeight);
 
 			var currentInput = false;
 
