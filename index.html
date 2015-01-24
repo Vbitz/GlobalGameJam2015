@@ -234,10 +234,14 @@
 				}
 			}
 
-			function weapon_makeStats(minAttack, maxAttack, type) {
+			function weapon_makeStats(minAttack, maxAttack, critChance, critAttacks, critMutiply, type) {
 				return {
 					minAttack: minAttack,
 					maxAttack: maxAttack,
+					critChance: critChance,
+					critAttacks: critAttacks,
+					critMutiply: critMutiply,
+
 					type: type,
 					slot: "primary_weapon"
 				};
@@ -277,9 +281,12 @@
 			}
 
 			monster_regster("area1_boss", e("em", {"class": "area1_boss"}, "Ada-Ra, King of Elements"), {
-				minAttack: 20,
-				maxAttack: 100,
+				minAttack: 50,
+				maxAttack: 200,
 				health: 5672,
+				critChance: 0.9,
+				critAttacks: 1,
+				critMutiply: 0.2
 				armor: 0.7,
 				level: 1
 			}, {
@@ -289,7 +296,8 @@
 				stats: {
 					level: 1,
 					armor: 0.25,
-					health: 873
+					health: 1878,
+					dodgeChance: 0.2
 				},
 				equipped: {},
 				inventory: {},
