@@ -83,16 +83,16 @@
 					<div id="partList">
 						<div id="area1_bossBattle">
 							<div id="area1_prologe">
-								<h2>Part 1</h2>
+								<h2>Part 43</h2>
 								After the end of your long quest you reach your final goal. <em class="area1_boss">Ada-Ra, King of Elements</em> reaches out to touch his sword to your weapon but you don't have one equipped, <strong>equip one from your inventory on the side to continue</strong>...
 							</div>
 							<div id="area1_postEquip" style="display: none;">
-								<h2>Part 2</h2>
+								<h2>Part 44</h2>
 								You pull your <span id="area1_postEquip_itemName"></span> and meet it with <em class="area1_boss">Ada-Ra</em>'s mighty sword.
 								<button class="btn btn-primary" id="area1_startBattle">Start Battle</button>
 							</div>
 							<div id="area1_battleWin" style="display: none;">
-								<h2>Part 3</h2>
+								<h2>Part 45</h2>
 								Congratulations you have defeated <em class="area1_boss">Ada-Ra, King of Elements</em>.
 							</div>
 						</div>
@@ -665,7 +665,7 @@
 				"<< Free stuff here http://example.com/ >>",
 				"That's It?",
 				"Cam or rage",
-				"You should have used Shard of Broken Time, maybe that would have fixed it",
+				"Shard of Broken Time is overpowered, maybe you should have used that instead",
 				"How can you even think that's a good length?",
 				"#ShortGames",
 				"#ggj2015"
@@ -752,7 +752,7 @@
 					if (messageCount > 3000) {
 						area2_chat_end();
 					} else {
-						if (currentMessageCount > 15) {
+						if (currentMessageCount > 12) {
 							$("#area2_chat_messages").find("tr:first").remove();
 						}
 						$("#area2_chat_messages").append(e("tr", {}, [e("td", {style: "font-weight: bold;", "color": area2_genUserColor()}, area2_generateCommentNickname()), e("td", {}, area2_generateCommentMessage())]));
